@@ -6,18 +6,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@IdClass(PersonWithWeaponId.class)
 @Table(name = "persons_with_weapon")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class PersonWithWeaponEntity {
-    @Id
+    @EmbeddedId
+    private PersonWithWeaponId id;
+
     @ManyToOne
+    @MapsId("personId")
     @JoinColumn(name = "person_id")
     private PersonEntity person;
-    @Id
+
     @ManyToOne
+    @MapsId("weaponId")
     @JoinColumn(name = "weapon_id")
     private WeaponEntity weapon;
 }
