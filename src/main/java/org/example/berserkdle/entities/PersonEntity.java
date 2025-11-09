@@ -22,12 +22,11 @@ public class PersonEntity {
     @ManyToOne
     @JoinColumn(name = "gender_id", nullable = false)
     private GenderEntity gender;
-    @ManyToMany
-    //@JoinColumn(name = "id", nullable = false)
-    private List<GroupEntity> groups;
     @ManyToOne
     @JoinColumn(name = "species_id", nullable = false)
     private SpeciesEntity species;
+    @OneToMany(mappedBy = "person")
+    private List<PersonWithGroupEntity> groups;
     @OneToMany(mappedBy = "person")
     private List<PersonWithWeaponEntity> weapons;
 }
