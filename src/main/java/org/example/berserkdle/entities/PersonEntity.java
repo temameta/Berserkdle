@@ -17,16 +17,16 @@ public class PersonEntity {
     @Column(nullable = false)
     private String name;
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "firstArc_id", nullable = false)
     private ArcEntity firstArc;
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "gender_id", nullable = false)
     private GenderEntity gender;
     @ManyToMany
     //@JoinColumn(name = "id", nullable = false)
     private List<GroupEntity> groups;
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "species_id", nullable = false)
     private SpeciesEntity species;
     @OneToMany(mappedBy = "person")
     private List<PersonWithWeaponEntity> weapons;
