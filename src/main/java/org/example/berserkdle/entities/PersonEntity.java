@@ -18,7 +18,7 @@ public class PersonEntity {
     private String name;
     @ManyToOne
     @JoinColumn(name = "id", nullable = false)
-    private ArcEntity arc;
+    private ArcEntity firstArc;
     @ManyToOne
     @JoinColumn(name = "id", nullable = false)
     private GenderEntity gender;
@@ -28,7 +28,6 @@ public class PersonEntity {
     @ManyToOne
     @JoinColumn(name = "id", nullable = false)
     private SpeciesEntity species;
-    @ManyToMany
-    //@JoinColumn(name = "id", nullable = false)
-    private List<WeaponEntity> weapons;
+    @OneToMany(mappedBy = "person")
+    private List<PersonWithWeaponEntity> weapons;
 }
