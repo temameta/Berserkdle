@@ -6,7 +6,7 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table(name = "characters")
+@Table(name = "persons")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,7 +17,7 @@ public class PersonEntity {
     @Column(nullable = false)
     private String name;
     @ManyToOne
-    @JoinColumn(name = "firstArc_id", nullable = false)
+    @JoinColumn(name = "first_arc_id", nullable = false)
     private ArcEntity firstArc;
     @ManyToOne
     @JoinColumn(name = "gender_id", nullable = false)
