@@ -34,42 +34,42 @@ public class PersonService extends AbstractService<PersonDTO, PersonEntity, Pers
     }
 
     @Override
-    public PersonEntity toEntity(PersonDTO DTO) {
+    public PersonEntity toEntity(PersonDTO PersonDTO) {
         PersonEntity personEntity = new PersonEntity();
 
-        personEntity.setName(DTO.getName());
-        personEntity.setSpecies(speciesRepository.findByName(DTO.getSpecies()));
-        personEntity.setGender(genderRepository.findByName(DTO.getGender()));
-        personEntity.setFirstArc(arcRepository.findByName(DTO.getFirstArc()));
+        personEntity.setName(PersonDTO.getName());
+        personEntity.setSpecies(speciesRepository.findByName(PersonDTO.getSpecies()));
+        personEntity.setGender(genderRepository.findByName(PersonDTO.getGender()));
+        personEntity.setFirstArc(arcRepository.findByName(PersonDTO.getFirstArc()));
 
-        if (personRepository.findByName(DTO.getName()) != null) {
-            personEntity.setGroups(personWithGroupRepository.findAllByPerson_Name(DTO.getName()));
-            personEntity.setWeapons(personWithWeaponRepository.findAllByPerson_Name(DTO.getName()));
+        if (personRepository.findByName(PersonDTO.getName()) != null) {
+            personEntity.setGroups(personWithGroupRepository.findAllByPerson_Name(PersonDTO.getName()));
+            personEntity.setWeapons(personWithWeaponRepository.findAllByPerson_Name(PersonDTO.getName()));
         }
         else {
-            for (String weaponName : DTO.getWeapons()) {
+            for (String weaponName : PersonDTO.getWeapons()) {
                 WeaponEntity weaponEntity = weaponRepository.findByName(weaponName);
-                personEntity.addWeapon(new PersonWithWeaponEntity(new PersonWithWeaponId(DTO.getId(), weaponEntity.getId()), personEntity, weaponEntity));
+                personEntity.addWeapon(new PersonWithWeaponEntity(new PersonWithWeaponId(PersonDTO.getId(), weaponEntity.getId()), personEntity, weaponEntity));
             }
-            for (String groupName : DTO.getGroups()) {
+            for (String groupName : PersonDTO.getGroups()) {
                 GroupEntity groupEntity = groupRepository.findByName(groupName);
-                personEntity.addGroup(new PersonWithGroupEntity(new PersonWithGroupId(DTO.getId(), groupEntity.getId()), personEntity, groupEntity));
+                personEntity.addGroup(new PersonWithGroupEntity(new PersonWithGroupId(PersonDTO.getId(), groupEntity.getId()), personEntity, groupEntity));
             }
         }
         return personEntity;
     }
 
     @Override
-    public PersonDTO toDTO(PersonEntity entity) {
+    public PersonDTO toDTO(PersonEntity PersonEntity) {
         PersonDTO personDTO = new PersonDTO();
-        personDTO.setName(entity.getName());
-        personDTO.setGender(entity.getGender().getName());
-        personDTO.setFirstArc(entity.getFirstArc().getName());
-        personDTO.setSpecies(entity.getSpecies().getName());
-        for (PersonWithGroupEntity personWithGroupEntity : personWithGroupRepository.findAllByPerson_Id(entity.getId())) {
+        personDTO.setName(PersonEntity.getName());
+        personDTO.setGender(PersonEntity.getGender().getName());
+        personDTO.setFirstArc(PersonEntity.getFirstArc().getName());
+        personDTO.setSpecies(PersonEntity.getSpecies().getName());
+        for (PersonWithGroupEntity personWithGroupEntity : personWithGroupRepository.findAllByPerson_Id(PersonEntity.getId())) {
             personDTO.addGroup(groupRepository.findById(personWithGroupEntity.getGroup().getId()).get().getName());
         }
-        for (PersonWithWeaponEntity personWithWeaponEntity : personWithWeaponRepository.findAllByPerson_Id(entity.getId())) {
+        for (PersonWithWeaponEntity personWithWeaponEntity : personWithWeaponRepository.findAllByPerson_Id(PersonEntity.getId())) {
             personDTO.addWeapon(groupRepository.findById(personWithWeaponEntity.getWeapon().getId()).get().getName());
         }
         return personDTO;

@@ -1,53 +1,37 @@
 package org.example.berserkdle.services;
 
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
 import org.example.berserkdle.dtos.GroupDTO;
 import org.example.berserkdle.entities.GroupEntity;
 import org.example.berserkdle.repositories.GroupRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 @Service
-@Data
-@RequiredArgsConstructor
-public class GroupService {
+public class GroupService extends AbstractService<GroupDTO, GroupEntity,  GroupRepository> {
     private final GroupRepository groupRepository;
 
-    public List<GroupDTO> findAll() {
-        return toGroupDTO(groupRepository.findAll());
+    public GroupService(GroupRepository groupRepository) {
+        super(groupRepository);
+        this.groupRepository = groupRepository;
     }
 
-    public GroupDTO findById(Long id) {
-        return toGroupDTO(groupRepository.findById(id));
-    }
-
+    @Override
     public GroupDTO findByName(String name) {
-        return toGroupDTO(groupRepository.findByName(name));
+        return toDTO(groupRepository.findByName(name));
     }
 
-    public GroupDTO toGroupDTO(GroupEntity groupEntity) {
+    @Override
+    public GroupDTO toDTO(GroupEntity groupEntity) {
         GroupDTO groupDTO = new GroupDTO();
-        groupDTO.setId(groupEntity.getId());
         groupDTO.setName(groupEntity.getName());
+        groupDTO.setId(groupEntity.getId());
         return groupDTO;
     }
 
-    public List<GroupDTO> toGroupDTO(List<GroupEntity> groupEntities) {
-        List<GroupDTO> groupDTOs = new ArrayList<>();
-        for (GroupEntity groupEntity : groupEntities) {
-            groupDTOs.add(toGroupDTO(groupEntity));
-        }
-        return groupDTOs;
-    }
-
-    public GroupDTO toGroupDTO(Optional<GroupEntity> optionalGroupEntity) {
-        if (optionalGroupEntity.isPresent()) {
-            return toGroupDTO(optionalGroupEntity.get());
-        }
-        return null;
+    @Override
+    public GroupEntity toEntity(GroupDTO groupDTO) {
+        GroupEntity groupEntity = new GroupEntity();
+        groupEntity.setName(groupDTO.getName());
+        groupEntity.setId(groupDTO.getId());
+        return groupEntity;
     }
 }
