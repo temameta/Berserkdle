@@ -16,7 +16,7 @@ public class PersonEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
     @ManyToOne
     @JoinColumn(name = "first_arc_id", nullable = false)

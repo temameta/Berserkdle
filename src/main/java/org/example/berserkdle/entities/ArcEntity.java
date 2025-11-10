@@ -12,6 +12,6 @@ public class ArcEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column
+    @Column(unique = true, nullable = false)
     private String name;
 }

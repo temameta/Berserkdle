@@ -14,7 +14,7 @@ public class WeaponEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
+    @Column(unique = true, nullable = false)
     private String name;
     @OneToMany(mappedBy = "weapon")
     private List<PersonWithWeaponEntity> persons;
