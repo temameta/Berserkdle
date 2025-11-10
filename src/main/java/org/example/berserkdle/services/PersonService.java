@@ -3,6 +3,7 @@ package org.example.berserkdle.services;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.example.berserkdle.dtos.PersonDTO;
 import org.example.berserkdle.entities.*;
 import org.example.berserkdle.repositories.*;
@@ -15,17 +16,16 @@ import java.util.Optional;
 
 @Service
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class PersonService {
-    private PersonRepository personRepository;
-    private PersonWithGroupRepository personWithGroupRepository;
-    private GroupRepository groupRepository;
-    private PersonWithWeaponRepository personWithWeaponRepository;
-    private WeaponRepository weaponRepository;
-    private SpeciesRepository speciesRepository;
-    private GenderRepository genderRepository;
-    private ArcRepository arcRepository;
+    private final PersonRepository personRepository;
+    private final PersonWithGroupRepository personWithGroupRepository;
+    private final GroupRepository groupRepository;
+    private final PersonWithWeaponRepository personWithWeaponRepository;
+    private final WeaponRepository weaponRepository;
+    private final SpeciesRepository speciesRepository;
+    private final GenderRepository genderRepository;
+    private final ArcRepository arcRepository;
 
     public List<PersonDTO> findAll() {
         return toPersonDTO(personRepository.findAll());
