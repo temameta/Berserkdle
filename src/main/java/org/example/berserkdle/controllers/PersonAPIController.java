@@ -1,10 +1,9 @@
 package org.example.berserkdle.controllers;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.example.berserkdle.dtos.PersonDTO;
-import org.example.berserkdle.entities.PersonEntity;
 import org.example.berserkdle.services.PersonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -14,10 +13,9 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/api/person")
-@AllArgsConstructor
-@NoArgsConstructor
-public class PersonController {
-    PersonService personService;
+@RequiredArgsConstructor
+public class PersonAPIController {
+    private final PersonService personService;
 
     @GetMapping("/get/all")
     public List<PersonDTO> getAllPersons() {
