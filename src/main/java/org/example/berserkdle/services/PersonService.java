@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @Data
@@ -27,6 +29,20 @@ public class PersonService {
 
     public List<PersonDTO> findAll() {
         return toPersonDTO(personRepository.findAll());
+    }
+
+    public PersonDTO findById(Long id) {
+        return toPersonDTO(personRepository.findById(id));
+    }
+
+    public PersonDTO findByName(String name) {
+        return toPersonDTO(personRepository.findByName(name));
+    }
+
+    private PersonDTO toPersonDTO(Optional<PersonEntity> optionalPersonEntity) {
+        if (optionalPersonEntity.isPresent())
+            return toPersonDTO(optionalPersonEntity.get());
+        return null;
     }
 
     public void save(PersonDTO personDTO) {
