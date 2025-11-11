@@ -1,6 +1,5 @@
 package org.example.berserkdle.services;
 
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -8,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Data
 @RequiredArgsConstructor
 public abstract class AbstractService<D, E, R extends JpaRepository<E, Long>> implements InterfaceGeneric<D, E> {
     private final R repository;
