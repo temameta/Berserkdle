@@ -7,16 +7,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GenderService extends AbstractService<GenderDTO, GenderEntity, GenderRepository>{
-    GenderRepository genderRepository;
 
-    public GenderService(GenderRepository genderRepository) {
-        super(genderRepository);
-        this.genderRepository = genderRepository;
-    }
-
-    @Override
-    public GenderDTO findByName(String name) {
-        return toDTO(genderRepository.findByName(name));
+    public GenderService(GenderRepository repository) {
+        super(repository);
     }
 
     @Override

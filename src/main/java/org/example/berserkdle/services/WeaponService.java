@@ -7,16 +7,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class WeaponService extends AbstractService<WeaponDTO, WeaponEntity, WeaponRepository> {
-    private final WeaponRepository weaponRepository;
 
-    public WeaponService(WeaponRepository weaponRepository) {
-        super(weaponRepository);
-        this.weaponRepository = weaponRepository;
-    }
-
-    @Override
-    public WeaponDTO findByName(String name) {
-        return toDTO(weaponRepository.findByName(name));
+    public WeaponService(WeaponRepository repository) {
+        super(repository);
     }
 
     @Override

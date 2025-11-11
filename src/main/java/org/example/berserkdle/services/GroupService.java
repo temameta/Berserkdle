@@ -7,16 +7,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GroupService extends AbstractService<GroupDTO, GroupEntity,  GroupRepository> {
-    private final GroupRepository groupRepository;
 
-    public GroupService(GroupRepository groupRepository) {
-        super(groupRepository);
-        this.groupRepository = groupRepository;
-    }
-
-    @Override
-    public GroupDTO findByName(String name) {
-        return toDTO(groupRepository.findByName(name));
+    public GroupService(GroupRepository repository) {
+        super(repository);
     }
 
     @Override

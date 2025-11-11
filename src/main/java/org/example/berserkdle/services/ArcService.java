@@ -7,16 +7,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ArcService extends AbstractService<ArcDTO, ArcEntity, ArcRepository>{
-    private final ArcRepository arcRepository;
 
-    public ArcService(ArcRepository arcRepository) {
-        super(arcRepository);
-        this.arcRepository = arcRepository;
-    }
-
-    @Override
-    public ArcDTO findByName(String name) {
-        return toDTO(arcRepository.findByName(name));
+    public ArcService(ArcRepository repository) {
+        super(repository);
     }
 
     @Override

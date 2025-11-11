@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PersonService extends AbstractService<PersonDTO, PersonEntity, PersonRepository>{
-    private final PersonRepository personRepository;
     private final PersonWithGroupRepository personWithGroupRepository;
     private final GroupRepository groupRepository;
     private final PersonWithWeaponRepository personWithWeaponRepository;
@@ -16,9 +15,8 @@ public class PersonService extends AbstractService<PersonDTO, PersonEntity, Pers
     private final GenderRepository genderRepository;
     private final ArcRepository arcRepository;
 
-    public PersonService(PersonRepository personRepository, PersonWithGroupRepository personWithGroupRepository, GroupRepository groupRepository, PersonWithWeaponRepository personWithWeaponRepository, WeaponRepository weaponRepository, SpeciesRepository speciesRepository, GenderRepository genderRepository, ArcRepository arcRepository) {
-        super(personRepository);
-        this.personRepository = personRepository;
+    public PersonService(PersonRepository repository, PersonWithGroupRepository personWithGroupRepository, GroupRepository groupRepository, PersonWithWeaponRepository personWithWeaponRepository, WeaponRepository weaponRepository, SpeciesRepository speciesRepository, GenderRepository genderRepository, ArcRepository arcRepository) {
+        super(repository);
         this.personWithGroupRepository = personWithGroupRepository;
         this.groupRepository = groupRepository;
         this.personWithWeaponRepository = personWithWeaponRepository;
@@ -26,11 +24,6 @@ public class PersonService extends AbstractService<PersonDTO, PersonEntity, Pers
         this.speciesRepository = speciesRepository;
         this.genderRepository = genderRepository;
         this.arcRepository = arcRepository;
-    }
-
-    @Override
-    public PersonDTO findByName(String name) {
-        return toDTO(personRepository.findByName(name));
     }
 
     @Override
@@ -42,7 +35,7 @@ public class PersonService extends AbstractService<PersonDTO, PersonEntity, Pers
         personEntity.setGender(genderRepository.findByName(PersonDTO.getGender()));
         personEntity.setFirstArc(arcRepository.findByName(PersonDTO.getFirstArc()));
 
-        if (personRepository.findByName(PersonDTO.getName()) != null) {
+        if (repository.findByName(PersonDTO.getName()) != null) {
             personEntity.setGroups(personWithGroupRepository.findAllByPerson_Name(PersonDTO.getName()));
             personEntity.setWeapons(personWithWeaponRepository.findAllByPerson_Name(PersonDTO.getName()));
         }

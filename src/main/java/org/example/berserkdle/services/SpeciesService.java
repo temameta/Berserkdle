@@ -7,16 +7,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SpeciesService extends AbstractService<SpeciesDTO, SpeciesEntity, SpeciesRepository> {
-    private final SpeciesRepository speciesRepository;
 
-    public SpeciesService(SpeciesRepository speciesRepository) {
-        super(speciesRepository);
-        this.speciesRepository = speciesRepository;
-    }
-
-    @Override
-    public SpeciesDTO findByName(String name) {
-        return toDTO(speciesRepository.findByName(name));
+    public SpeciesService(SpeciesRepository repository) {
+        super(repository);
     }
 
     @Override
