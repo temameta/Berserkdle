@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public abstract class AbstractService<D, E extends AbstractEntity, R extends AbstractRepository<E, Long>> implements InterfaceService<D, E> {
+public abstract class AbstractService<D, E extends AbstractEntity, R extends AbstractRepository<E>> implements InterfaceService<D, E> {
     private final R repository;
 
     @Transactional(readOnly = true)
