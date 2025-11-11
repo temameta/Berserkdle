@@ -1,17 +1,23 @@
 package org.example.berserkdle.services;
 
 import lombok.RequiredArgsConstructor;
+import org.example.berserkdle.dtos.AbstractDTO;
 import org.example.berserkdle.entities.AbstractEntity;
 import org.example.berserkdle.repositories.AbstractRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@RequiredArgsConstructor
-public abstract class AbstractService<D, E extends AbstractEntity, R extends AbstractRepository<E>> implements InterfaceService<D, E> {
-    private final R repository;
+public abstract class AbstractService<D extends AbstractDTO, E extends AbstractEntity, R extends AbstractRepository<E>> implements InterfaceService<D, E> {
+    protected final R repository;
+
+    @Autowired
+    public AbstractService(R repository) {
+        this.repository = repository;
+    }
 
     @Transactional(readOnly = true)
     @Override
@@ -41,8 +47,8 @@ public abstract class AbstractService<D, E extends AbstractEntity, R extends Abs
     @Transactional(readOnly = true)
     @Override
     public D findByName(String name) {
-        return null;
-    };
+        return toDTO(repository.findByName(name));
+    }
 
     @Override
     public List<D> toDTO(List<E> entities) {
