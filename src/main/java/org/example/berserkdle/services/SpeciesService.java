@@ -14,17 +14,17 @@ public class SpeciesService extends AbstractService<SpeciesDTO, SpeciesEntity, S
 
     @Override
     public SpeciesDTO toDTO(SpeciesEntity speciesEntity) {
-        SpeciesDTO speciesDTO = new SpeciesDTO();
-        speciesDTO.setName(speciesEntity.getName());
-        speciesDTO.setId(speciesEntity.getId());
-        return speciesDTO;
+        return SpeciesDTO.builder()
+                .id(speciesEntity.getId())
+                .name(speciesEntity.getName())
+                .build();
     }
 
     @Override
     public SpeciesEntity toEntity(SpeciesDTO speciesDTO) {
-        SpeciesEntity speciesEntity = new SpeciesEntity();
-        speciesEntity.setName(speciesDTO.getName());
-        speciesEntity.setId(speciesDTO.getId());
-        return speciesEntity;
+        return SpeciesEntity.builder()
+                .id(speciesDTO.getId())
+                .name(speciesDTO.getName())
+                .build();
     }
 }

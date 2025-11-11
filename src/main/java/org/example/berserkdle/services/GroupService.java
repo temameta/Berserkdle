@@ -14,17 +14,17 @@ public class GroupService extends AbstractService<GroupDTO, GroupEntity,  GroupR
 
     @Override
     public GroupDTO toDTO(GroupEntity groupEntity) {
-        GroupDTO groupDTO = new GroupDTO();
-        groupDTO.setName(groupEntity.getName());
-        groupDTO.setId(groupEntity.getId());
-        return groupDTO;
+        return GroupDTO.builder()
+                .id(groupEntity.getId())
+                .name(groupEntity.getName())
+                .build();
     }
 
     @Override
     public GroupEntity toEntity(GroupDTO groupDTO) {
-        GroupEntity groupEntity = new GroupEntity();
-        groupEntity.setName(groupDTO.getName());
-        groupEntity.setId(groupDTO.getId());
-        return groupEntity;
+        return GroupEntity.builder()
+                .id(groupDTO.getId())
+                .name(groupDTO.getName())
+                .build();
     }
 }

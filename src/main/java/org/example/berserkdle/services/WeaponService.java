@@ -13,18 +13,18 @@ public class WeaponService extends AbstractService<WeaponDTO, WeaponEntity, Weap
     }
 
     @Override
-    public WeaponDTO toDTO(WeaponEntity entity) {
-        WeaponDTO weaponDTO = new WeaponDTO();
-        weaponDTO.setId(entity.getId());
-        weaponDTO.setName(entity.getName());
-        return weaponDTO;
+    public WeaponDTO toDTO(WeaponEntity weaponEntity) {
+        return WeaponDTO.builder()
+                .id(weaponEntity.getId())
+                .name(weaponEntity.getName())
+                .build();
     }
 
     @Override
-    public WeaponEntity toEntity(WeaponDTO DTO) {
-        WeaponEntity weaponEntity = new WeaponEntity();
-        weaponEntity.setId(DTO.getId());
-        weaponEntity.setName(DTO.getName());
-        return weaponEntity;
+    public WeaponEntity toEntity(WeaponDTO weaponDTO) {
+        return WeaponEntity.builder()
+                .id(weaponDTO.getId())
+                .name(weaponDTO.getName())
+                .build();
     }
 }

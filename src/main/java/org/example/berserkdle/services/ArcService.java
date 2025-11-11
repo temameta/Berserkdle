@@ -14,10 +14,10 @@ public class ArcService extends AbstractService<ArcDTO, ArcEntity, ArcRepository
 
     @Override
     public ArcDTO toDTO(ArcEntity arcEntity) {
-        ArcDTO arcDTO = new ArcDTO();
-        arcDTO.setId(arcEntity.getId());
-        arcDTO.setName(arcEntity.getName());
-        return arcDTO;
+        return ArcDTO.builder()
+                .id(arcEntity.getId())
+                .name(arcEntity.getName())
+                .build();
     }
 
     @Override

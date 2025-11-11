@@ -2,6 +2,7 @@ package org.example.berserkdle.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@SuperBuilder
 public class WeaponEntity extends AbstractEntity {
     @OneToMany(mappedBy = "weapon")
     private List<PersonWithWeaponEntity> persons;
