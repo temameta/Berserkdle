@@ -1,9 +1,12 @@
 package org.example.berserkdle.services;
 
+import org.example.berserkdle.dtos.AbstractDTO;
+import org.example.berserkdle.entities.AbstractEntity;
+
 import java.util.List;
 import java.util.Optional;
 
-public interface InterfaceService<D, E> {
+public interface InterfaceService<D extends AbstractDTO, E extends AbstractEntity> {
     List<D> findAll();
     D findById(Long id);
     D findByName(String name);
