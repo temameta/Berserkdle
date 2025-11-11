@@ -1,0 +1,30 @@
+package org.example.berserkdle.controllers;
+
+import org.example.berserkdle.dtos.AbstractDTO;
+import org.example.berserkdle.entities.AbstractEntity;
+import org.example.berserkdle.services.InterfaceService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+
+import java.util.List;
+
+
+public class AbstractAPIController<D extends AbstractDTO, E extends AbstractEntity, S extends InterfaceService<D, E>> implements InterfaceAPIController<D> {
+    private final S service;
+
+    @Autowired
+    protected AbstractAPIController(S service) {
+        this.service = service;
+    }
+
+    @Override
+    public List<D> getAll() {
+        return service.findAll();
+    }
+
+    @Override
+    public HttpStatus create(D DTO) {
+        service.save(DTO);
+        return HttpStatus.OK;
+    }
+}
