@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GenderRepository extends AbstractRepository<GenderEntity, Long> {
-    GenderEntity findByName(String name);
 }

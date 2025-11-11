@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ArcRepository extends AbstractRepository<ArcEntity, Long> {
-    ArcEntity findByName(String name);
 }

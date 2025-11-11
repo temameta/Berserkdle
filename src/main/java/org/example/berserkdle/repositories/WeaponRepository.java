@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WeaponRepository extends AbstractRepository<WeaponEntity, Long> {
-    WeaponEntity findByName(String name);
 }

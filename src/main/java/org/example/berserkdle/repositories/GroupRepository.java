@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GroupRepository extends AbstractRepository<GroupEntity, Long> {
-    GroupEntity findByName(String name);
 }
