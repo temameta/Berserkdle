@@ -1,14 +1,17 @@
 package org.example.berserkdle.dtos;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
+@Data
+@ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@SuperBuilder
 public class PersonDTO extends AbstractDTO {
     private String firstArc;
     private String gender;
