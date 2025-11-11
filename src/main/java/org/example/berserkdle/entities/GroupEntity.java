@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
+
 @Entity
 @Table(name = "groups")
 @EqualsAndHashCode(callSuper = true)
@@ -13,4 +15,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class GroupEntity extends AbstractEntity {
+    @OneToMany(mappedBy = "group")
+    private List<PersonWithGroupEntity> persons;
 }

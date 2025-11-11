@@ -12,7 +12,6 @@ import lombok.experimental.SuperBuilder;
 @Data
 @ToString(callSuper = true)
 @AllArgsConstructor
-@NoArgsConstructor
 @SuperBuilder
 public class ArcEntity extends AbstractEntity {
 }

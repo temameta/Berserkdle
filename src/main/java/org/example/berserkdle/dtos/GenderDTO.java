@@ -7,7 +7,6 @@ import lombok.experimental.SuperBuilder;
 @Data
 @ToString(callSuper = true)
 @AllArgsConstructor
-@NoArgsConstructor
 @SuperBuilder
 public class GenderDTO extends AbstractDTO {
 }
