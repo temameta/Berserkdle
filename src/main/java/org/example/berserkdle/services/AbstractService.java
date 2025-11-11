@@ -3,14 +3,13 @@ package org.example.berserkdle.services;
 import lombok.RequiredArgsConstructor;
 import org.example.berserkdle.entities.AbstractEntity;
 import org.example.berserkdle.repositories.AbstractRepository;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public abstract class AbstractService<D, E extends AbstractEntity, R extends AbstractRepository<E, Long>> implements InterfaceGeneric<D, E> {
+public abstract class AbstractService<D, E extends AbstractEntity, R extends AbstractRepository<E, Long>> implements InterfaceService<D, E> {
     private final R repository;
 
     @Override

@@ -3,7 +3,7 @@ package org.example.berserkdle.services;
 import java.util.List;
 import java.util.Optional;
 
-public interface InterfaceGeneric<D, E> {
+public interface InterfaceService<D, E> {
     List<D> findAll();
     D findById(Long id);
     D findByName(String name);
