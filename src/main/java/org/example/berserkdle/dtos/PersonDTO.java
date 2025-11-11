@@ -1,18 +1,15 @@
 package org.example.berserkdle.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
-@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
-public class PersonDTO {
-    private Long id;
-    private String name;
+@NoArgsConstructor
+@Data
+public class PersonDTO extends AbstractDTO {
     private String firstArc;
     private String gender;
     private String species;
