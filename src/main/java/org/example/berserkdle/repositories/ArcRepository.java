@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ArcRepository extends JpaRepository<ArcEntity, Long> {
+public interface ArcRepository extends AbstractRepository<ArcEntity, Long> {
     ArcEntity findByName(String name);
 }
