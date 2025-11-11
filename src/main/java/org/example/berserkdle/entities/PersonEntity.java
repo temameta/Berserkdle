@@ -2,6 +2,7 @@ package org.example.berserkdle.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.example.berserkdle.dtos.PersonDTO;
 
 import java.util.ArrayList;
@@ -9,15 +10,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "persons")
+@EqualsAndHashCode(callSuper = true)
 @Data
-@NoArgsConstructor
+@ToString(callSuper = true)
 @AllArgsConstructor
-public class PersonEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column(nullable = false, unique = true)
-    private String name;
+@NoArgsConstructor
+@SuperBuilder
+public class PersonEntity extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "first_arc_id", nullable = false)
     private ArcEntity firstArc;

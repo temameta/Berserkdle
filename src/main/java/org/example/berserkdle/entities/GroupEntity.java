@@ -2,16 +2,15 @@ package org.example.berserkdle.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "groups")
+@EqualsAndHashCode(callSuper = true)
 @Data
-@NoArgsConstructor
+@ToString(callSuper = true)
 @AllArgsConstructor
-public class GroupEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column(unique = true, nullable = false)
-    private String name;
+@NoArgsConstructor
+@SuperBuilder
+public class GroupEntity extends AbstractEntity {
 }
