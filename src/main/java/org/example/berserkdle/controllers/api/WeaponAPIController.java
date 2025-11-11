@@ -1,4 +1,4 @@
-package org.example.berserkdle.controllers;
+package org.example.berserkdle.controllers.api;
 
 import org.example.berserkdle.dtos.WeaponDTO;
 import org.example.berserkdle.entities.WeaponEntity;

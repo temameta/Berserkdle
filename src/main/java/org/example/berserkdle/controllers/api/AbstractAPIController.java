@@ -1,4 +1,4 @@
-package org.example.berserkdle.controllers;
+package org.example.berserkdle.controllers.api;
 
 import org.example.berserkdle.dtos.AbstractDTO;
 import org.example.berserkdle.entities.AbstractEntity;
@@ -26,5 +26,15 @@ public class AbstractAPIController<D extends AbstractDTO, E extends AbstractEnti
     public HttpStatus create(D DTO) {
         service.save(DTO);
         return HttpStatus.OK;
+    }
+
+    @Override
+    public D getByName(String name) {
+        return service.findByName(name);
+    }
+
+    @Override
+    public D getById(Long id) {
+        return service.findById(id);
     }
 }
