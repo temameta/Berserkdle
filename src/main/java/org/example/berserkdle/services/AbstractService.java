@@ -40,8 +40,7 @@ public abstract class AbstractService<D extends AbstractDTO, E extends AbstractE
     @Transactional
     @Override
     public void save(List<D> DTOs) {
-        for (D DTO : DTOs)
-            save(DTO);
+        repository.saveAll(toEntity(DTOs));
     }
 
     @Transactional(readOnly = true)
