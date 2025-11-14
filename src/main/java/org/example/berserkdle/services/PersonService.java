@@ -42,11 +42,11 @@ public class PersonService extends AbstractService<PersonDTO, PersonEntity, Pers
         else {
             for (String weaponName : PersonDTO.getWeapons()) {
                 WeaponEntity weaponEntity = weaponRepository.findByName(weaponName);
-                personEntity.addWeapon(new PersonWithWeaponEntity(new PersonWithWeaponId(PersonDTO.getId(), weaponEntity.getId()), personEntity, weaponEntity));
+                personEntity.addWeapon(new PersonWithWeaponEntity(new PersonWithWeaponId(personEntity.getId(), weaponEntity.getId()), personEntity, weaponEntity));
             }
             for (String groupName : PersonDTO.getGroups()) {
                 GroupEntity groupEntity = groupRepository.findByName(groupName);
-                personEntity.addGroup(new PersonWithGroupEntity(new PersonWithGroupId(PersonDTO.getId(), groupEntity.getId()), personEntity, groupEntity));
+                personEntity.addGroup(new PersonWithGroupEntity(new PersonWithGroupId(personEntity.getId(), groupEntity.getId()), personEntity, groupEntity));
             }
         }
         return personEntity;

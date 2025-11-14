@@ -6,7 +6,7 @@ import org.example.berserkdle.repositories.ArcRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ArcService extends AbstractService<ArcDTO, ArcEntity, ArcRepository>{
+public class ArcService extends AbstractService<ArcDTO, ArcEntity, ArcRepository> {
 
     public ArcService(ArcRepository repository) {
         super(repository);
@@ -15,7 +15,6 @@ public class ArcService extends AbstractService<ArcDTO, ArcEntity, ArcRepository
     @Override
     public ArcDTO toDTO(ArcEntity arcEntity) {
         return ArcDTO.builder()
-                .id(arcEntity.getId())
                 .name(arcEntity.getName())
                 .build();
     }
@@ -23,7 +22,6 @@ public class ArcService extends AbstractService<ArcDTO, ArcEntity, ArcRepository
     @Override
     public ArcEntity toEntity(ArcDTO arcDTO) {
         return ArcEntity.builder()
-                .id(arcDTO.getId())
                 .name(arcDTO.getName())
                 .build();
     }

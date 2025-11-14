@@ -15,7 +15,6 @@ public class WeaponService extends AbstractService<WeaponDTO, WeaponEntity, Weap
     @Override
     public WeaponDTO toDTO(WeaponEntity weaponEntity) {
         return WeaponDTO.builder()
-                .id(weaponEntity.getId())
                 .name(weaponEntity.getName())
                 .build();
     }
@@ -23,7 +22,6 @@ public class WeaponService extends AbstractService<WeaponDTO, WeaponEntity, Weap
     @Override
     public WeaponEntity toEntity(WeaponDTO weaponDTO) {
         return WeaponEntity.builder()
-                .id(weaponDTO.getId())
                 .name(weaponDTO.getName())
                 .build();
     }

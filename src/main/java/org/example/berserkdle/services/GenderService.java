@@ -15,7 +15,6 @@ public class GenderService extends AbstractService<GenderDTO, GenderEntity, Gend
     @Override
     public GenderDTO toDTO(GenderEntity genderEntity) {
         return GenderDTO.builder()
-                .id(genderEntity.getId())
                 .name(genderEntity.getName())
                 .build();
     }
@@ -23,7 +22,6 @@ public class GenderService extends AbstractService<GenderDTO, GenderEntity, Gend
     @Override
     public GenderEntity toEntity(GenderDTO genderDTO) {
         return GenderEntity.builder()
-                .id(genderDTO.getId())
                 .name(genderDTO.getName())
                 .build();
     }

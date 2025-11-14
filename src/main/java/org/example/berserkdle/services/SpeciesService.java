@@ -15,7 +15,6 @@ public class SpeciesService extends AbstractService<SpeciesDTO, SpeciesEntity, S
     @Override
     public SpeciesDTO toDTO(SpeciesEntity speciesEntity) {
         return SpeciesDTO.builder()
-                .id(speciesEntity.getId())
                 .name(speciesEntity.getName())
                 .build();
     }
@@ -23,7 +22,6 @@ public class SpeciesService extends AbstractService<SpeciesDTO, SpeciesEntity, S
     @Override
     public SpeciesEntity toEntity(SpeciesDTO speciesDTO) {
         return SpeciesEntity.builder()
-                .id(speciesDTO.getId())
                 .name(speciesDTO.getName())
                 .build();
     }
