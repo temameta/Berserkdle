@@ -1,0 +1,85 @@
+body {
+    background-color: #39a47d;
+}
+
+.central-layout {
+    horiz-align: center;
+    align-items: start;
+    vertical-align: center;
+}
+
+.chevron-right {
+    height: 20%;
+    width: 10%;
+}
+
+.dropdown:hover .chevron-right {
+    transform: rotate(90deg);
+}
+
+/* Общие стили для кнопок */
+.button {
+    background-color: #dedede;
+    border-color: #000000;
+    border-width: 3px;
+    border-radius: 5px;
+    width: 170px;
+    height: 70px;
+    align-items: center;
+    transition-duration: 0.1s;
+    transition-property: background-color;
+    transition-timing-function: ease;
+}
+
+.button:hover {
+    background-color: #B5B4B4;
+}
+
+.button:active {
+    background-color: #757474;
+}
+
+.button-div {
+    align-items: start;
+}
+
+/* Общие настройки для выпадающих списков */
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.dropdown {
+    display: inline-block;
+}
+
+/* Выпадающий список для создания */
+
+.dropdown#create-dropdown:hover .dropdown-content#create-dropdown-content {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Выпадающий список для удаления */
+
+.dropdown#delete-dropdown:hover .dropdown-content#delete-dropdown-content {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Выпадающий список для изменения */
+
+.dropdown#update-dropdown:hover .dropdown-content#update-dropdown-content {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Выпадающий список для получения */
+
+.dropdown#get-dropdown:hover .dropdown-content#get-dropdown-content {
+    display: flex;
+    flex-direction: column;
+}
