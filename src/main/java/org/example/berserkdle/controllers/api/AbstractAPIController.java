@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import java.util.List;
 
 
-public class AbstractAPIController<D extends AbstractDTO, E extends AbstractEntity, S extends InterfaceService<D, E>> implements InterfaceAPIController<D> {
+public abstract class AbstractAPIController<D extends AbstractDTO, E extends AbstractEntity, S extends InterfaceService<D, E>> implements InterfaceAPIController<D> {
     private final S service;
 
     @Autowired
