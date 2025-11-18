@@ -1,0 +1,19 @@
+<div class="create-layout" xmlns:th="http://www.thymeleaf.org" th:fragment="createForm(object)"
+     th:with="entityName=${#strings.toLowerCase(object?.class?.simpleName)},
+     actionUrl=${'/api/' + entityName + 's/create'}">
+    <form th:action="@{${actionUrl}}" method="post" th:object="${object}">
+        <span>Название:</span>
+        <div>
+            <label for="name">Введите название:</label>
+            <input type="text"
+                   id="name"
+                   name="name"
+                   th:value="${object.name}"
+                   placeholder="Введите название..."
+                   required>
+        </div>
+        <div>
+            <button class="button" type="submit">Создать</button>
+        </div>
+    </form>
+</div>
