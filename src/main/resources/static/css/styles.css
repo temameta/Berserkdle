@@ -85,3 +85,8 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+.create-layout {
+    display: inline-block;
+    align-self: center;
+}
