@@ -1,0 +1,60 @@
+<div class="central-layout" xmlns:th="http://www.thymeleaf.org">
+    <div class="button-div">
+        <div class="dropdown" id="create-dropdown">
+            <button class="button" id="create-button">
+                <img th:src="@{pic/Chevron right.png}" alt="chevron_right" class="chevron-right">
+                Создать
+            </button>
+            <div class="dropdown-content" id="create-dropdown-content">
+                <a href="/person/create"><button class="button">Персонаж</button></a>
+                <a href="/weapon/create"><button class="button">Оружие</button></a>
+                <a href="/group/create"><button class="button">Группа</button></a>
+                <a href="/gender/create"><button class="button">Пол</button></a>
+                <a href="/species/create"><button class="button">Раса</button></a>
+                <a href="/arc/create"><button class="button">Арка</button></a>
+            </div>
+        </div>
+        <div class="dropdown" id="delete-dropdown">
+            <button class="button" id="delete-button">
+                <img th:src="@{pic/Chevron right.png}" alt="chevron_right" class="chevron-right">
+                Удалить
+            </button>
+            <div class="dropdown-content" id="delete-dropdown-content">
+                <button class="button" type="submit" value="/person/delete">Персонаж</button>
+                <button class="button" type="submit" value="/weapon/delete">Оружие</button>
+                <button class="button" type="submit" value="/group/delete">Группа</button>
+                <button class="button" type="submit" value="/gender/delete">Пол</button>
+                <button class="button" type="submit" value="/species/delete">Раса</button>
+                <button class="button" type="submit" value="/arc/delete">Арка</button>
+            </div>
+        </div>
+        <div class="dropdown" id="update-dropdown">
+            <button class="button" id="update-button">
+                <img th:src="@{pic/Chevron right.png}" alt="chevron_right" class="chevron-right">
+                Изменить
+            </button>
+            <div class="dropdown-content" id="update-dropdown-content">
+                <button class="button" type="submit" value="/person/update">Персонаж</button>
+                <button class="button" type="submit" value="/weapon/update">Оружие</button>
+                <button class="button" type="submit" value="/group/update">Группа</button>
+                <button class="button" type="submit" value="/gender/update">Пол</button>
+                <button class="button" type="submit" value="/species/update">Раса</button>
+                <button class="button" type="submit" value="/arc/update">Арка</button>
+            </div>
+        </div>
+        <div class="dropdown" id="get-dropdown">
+            <button class="button" id="get-button">
+                <img th:src="@{pic/Chevron right.png}" alt="chevron_right" class="chevron-right">
+                Получить
+            </button>
+            <div class="dropdown-content" id="get-dropdown-content">
+                <button class="button" type="submit" value="/person/get">Персонаж</button>
+                <button class="button" type="submit" value="/weapon/get">Оружие</button>
+                <button class="button" type="submit" value="/group/get">Группа</button>
+                <button class="button" type="submit" value="/gender/get">Пол</button>
+                <button class="button" type="submit" value="/species/get">Раса</button>
+                <button class="button" type="submit" value="/arc/get">Арка</button>
+            </div>
+        </div>
+    </div>
+</div>
