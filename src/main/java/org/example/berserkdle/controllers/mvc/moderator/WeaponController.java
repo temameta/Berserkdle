@@ -15,8 +15,7 @@ public class WeaponController implements InterfaceController {
 
     @Override
     public String create(Model model) {
-        WeaponDTO weaponDTO = new WeaponDTO();
-        model.addAttribute("weapon", weaponDTO);
+        model.addAttribute("weapon", new WeaponDTO());
         return "weapon/creation";
     }
 

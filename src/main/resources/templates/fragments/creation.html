@@ -1,6 +1,6 @@
 <div class="create-layout" xmlns:th="http://www.thymeleaf.org" th:fragment="createForm(object)"
-     th:with="entityName=${#strings.toLowerCase(object?.class?.simpleName)},
-     actionUrl=${'/api/' + entityName + 's/create'}">
+     th:with="entityName=${object?.class?.simpleName},
+     actionUrl=${'/api/' + entityName + '/create'}">
     <form th:action="@{${actionUrl}}" method="post" th:object="${object}">
         <span>Название:</span>
         <div>
