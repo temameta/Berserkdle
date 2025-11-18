@@ -3,6 +3,6 @@
 <head th:replace="~{fragments/head}"/>
 <body>
 <div th:replace="~{fragments/navbar}"></div>
-<div th:replace="~{fragments/creation :: createForm(${weapon})}"></div>
+<div th:replace="~{fragments/creation :: createForm(${weapon}, '/api/weapon/create')}"></div>
 </body>
 </html>
