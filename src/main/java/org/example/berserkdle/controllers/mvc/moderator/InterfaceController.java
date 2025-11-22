@@ -11,7 +11,7 @@ public interface InterfaceController<D extends AbstractDTO> {
     @GetMapping("/get")
     String get();
     @GetMapping("/create")
-    String create(Model model);
+    String create();
     @PostMapping("/create")
     String create(D DTO, BindingResult bindingResult, RedirectAttributes redirectAttributes);
     @GetMapping("/update")
