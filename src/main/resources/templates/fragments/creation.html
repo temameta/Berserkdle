@@ -1,14 +1,15 @@
 <div class="create-layout" xmlns:th="http://www.thymeleaf.org" th:fragment="createForm(object, actionUrl)">
-    <form th:action="@{${actionUrl}}" method="post" th:object="${object}">
-        <span>Название:</span>
+    <form th:action="@{${actionUrl}}"
+          th:method="post"
+          th:object="${object}">
         <div>
             <label for="name">Введите название:</label>
             <input type="text"
                    id="name"
                    name="name"
                    th:value="${object.name}"
-                   placeholder="Введите название..."
-                   required>
+                   placeholder="Название"
+                   required/>
         </div>
         <div>
             <button class="button" type="submit">Создать</button>
