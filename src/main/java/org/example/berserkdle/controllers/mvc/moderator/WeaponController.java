@@ -37,7 +37,7 @@ public class WeaponController implements InterfaceController<WeaponDTO> {
     public String create(WeaponDTO weaponModel, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             //log.warn("Ошибки валидации при добавлении компании: {}", bindingResult.getAllErrors());
-            redirectAttributes.addFlashAttribute("weapon", weaponModel);
+            redirectAttributes.addFlashAttribute("weaponModel", weaponModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.weapon", bindingResult);
             return "redirect:/weapon/create";
         }
