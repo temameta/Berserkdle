@@ -1,17 +1,17 @@
-<div class="center" xmlns:th="http://www.thymeleaf.org" th:fragment="createForm(object, actionUrl)">
+<div class="creation-layout" xmlns:th="http://www.thymeleaf.org" th:fragment="createForm(object, actionUrl)">
     <form th:action="@{${actionUrl}}"
           th:method="post"
           th:object="${object}">
-        <div>
-            <label for="name">Введите название:</label>
+        <div id="label-and-input">
+            <label for="name">Название:</label>
             <input type="text"
                    id="name"
                    name="name"
                    th:value="${object.name}"
-                   placeholder="Название"
+                   placeholder="Введите название"
                    required/>
         </div>
-        <div>
+        <div id="create-button">
             <button class="button" type="submit">Создать</button>
         </div>
     </form>
