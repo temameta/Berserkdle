@@ -6,10 +6,11 @@ body {
     margin: 0;
 }
 
-.central-layout {
+.navbar-layout {
     horiz-align: center;
     padding-left: 20%;
     padding-right: 20%;
+    padding-top: 5px;
     align-items: start;
     vertical-align: center;
 }
