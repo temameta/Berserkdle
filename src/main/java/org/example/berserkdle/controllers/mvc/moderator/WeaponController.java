@@ -1,5 +1,6 @@
 package org.example.berserkdle.controllers.mvc.moderator;
 
+import jakarta.validation.Valid;
 import org.example.berserkdle.dtos.WeaponDTO;
 import org.example.berserkdle.services.WeaponService;
 import org.springframework.stereotype.Controller;
@@ -34,11 +35,11 @@ public class WeaponController implements InterfaceController<WeaponDTO> {
     }
 
     @Override
-    public String create(WeaponDTO weaponModel, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String create(@Valid WeaponDTO weaponModel, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             //log.warn("Ошибки валидации при добавлении компании: {}", bindingResult.getAllErrors());
             redirectAttributes.addFlashAttribute("weaponModel", weaponModel);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.weapon", bindingResult);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.weaponModel", bindingResult);
             return "redirect:/weapon/create";
         }
         weaponService.save(weaponModel);
