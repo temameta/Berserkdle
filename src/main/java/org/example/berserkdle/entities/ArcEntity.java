@@ -1,5 +1,6 @@
 package org.example.berserkdle.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.*;
@@ -11,7 +12,9 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @ToString(callSuper = true)
-@AllArgsConstructor
+@NoArgsConstructor
 @SuperBuilder
 public class ArcEntity extends AbstractEntity {
+    @Column(unique = true, nullable = false)
+    private String name;
 }

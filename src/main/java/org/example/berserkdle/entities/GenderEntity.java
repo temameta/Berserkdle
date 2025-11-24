@@ -9,7 +9,9 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @ToString(callSuper = true)
-@AllArgsConstructor
+@NoArgsConstructor
 @SuperBuilder
 public class GenderEntity extends AbstractEntity {
+    @Column(unique = true, nullable = false)
+    private String name;
 }

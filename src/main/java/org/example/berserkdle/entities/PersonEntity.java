@@ -13,10 +13,11 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @ToString(callSuper = true)
-@AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
 public class PersonEntity extends AbstractEntity {
+    @Column(unique = true, nullable = false)
+    private String name;
     @ManyToOne
     @JoinColumn(name = "first_arc_id", nullable = false)
     private ArcEntity firstArc;

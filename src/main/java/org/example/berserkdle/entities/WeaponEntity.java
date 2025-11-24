@@ -12,10 +12,11 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @ToString(callSuper = true)
-@AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
 public class WeaponEntity extends AbstractEntity {
+    @Column(unique = true, nullable = false)
+    private String name;
     @OneToMany(mappedBy = "weapon")
     private List<PersonWithWeaponEntity> persons;
 }
