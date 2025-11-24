@@ -1,7 +1,10 @@
 package org.example.berserkdle.dtos;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.example.berserkdle.utils.validation.UniqueName;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -9,4 +12,11 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 public class ArcDTO extends AbstractDTO {
+    @Override
+    @UniqueName(entityClass = ArcDTO.class, message = "Такая арка уже существует!")
+    @NotEmpty(message = "Имя арки не может быть пустым!")
+    @Size(min = 2, max = 128, message = "Имя арки должно быть больше 2 и меньше 128 символов!")
+    public String getName() {
+        return super.getName();
+    }
 }
