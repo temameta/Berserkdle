@@ -6,10 +6,14 @@
             <label for="name">Название:</label>
             <input type="text"
                    id="name"
-                   name="name"
-                   th:value="${object.name}"
+                   th:field="*{${object.name}}"
+                   th:errorclass="is-invalid"
                    placeholder="Введите название"
                    required/>
+            <small th:if="${#fields.hasErrors('name')}"
+                   th:errors="*{name}"
+                   class="text-danger">
+            </small>
         </div>
         <div id="create-button">
             <button class="button" type="submit">Создать</button>
