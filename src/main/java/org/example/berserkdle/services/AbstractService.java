@@ -71,4 +71,10 @@ public abstract class AbstractService<D extends AbstractDTO, E extends AbstractE
             entities.add(toEntity(DTO));
         return entities;
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public boolean existsByName(String name) {
+        return repository.existsByName(name);
+    }
 }

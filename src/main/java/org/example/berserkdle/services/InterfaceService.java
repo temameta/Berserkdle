@@ -17,4 +17,5 @@ public interface InterfaceService<D extends AbstractDTO, E extends AbstractEntit
     List<E> toEntity(List<D> DTOs);
     void save(D DTO);
     void save(List<D> DTOs);
+    boolean existsByName(String name);
 }
