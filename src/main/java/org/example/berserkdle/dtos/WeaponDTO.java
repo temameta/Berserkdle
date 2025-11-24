@@ -13,7 +13,7 @@ import org.example.berserkdle.utils.validation.UniqueName;
 @SuperBuilder
 public class WeaponDTO extends AbstractDTO {
     @Override
-    @UniqueName(entityClass = ArcDTO.class, message = "Такое оружие уже существует!")
+    @UniqueName(entityClass = WeaponDTO.class, message = "Такое оружие уже существует!")
     @NotEmpty(message = "Название оружия не может быть пустым!")
     @Size(min = 2, max = 32, message = "Название оружия должно быть больше 2 и меньше 32 символов!")
     public String getName() {

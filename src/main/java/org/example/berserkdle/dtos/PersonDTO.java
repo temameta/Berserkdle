@@ -1,8 +1,10 @@
 package org.example.berserkdle.dtos;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.example.berserkdle.utils.validation.UniqueName;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,14 @@ public class PersonDTO extends AbstractDTO {
     private List<String> groups = new ArrayList<>();
     @NotEmpty(message = "Оружия не могут быть пустыми!")
     private List<String> weapons = new ArrayList<>();
+
+    @Override
+    @UniqueName(entityClass = PersonDTO.class, message = "Такой персонаж уже существует!")
+    @NotEmpty(message = "Имя персонажа не может быть пустым!")
+    @Size(min = 2, max = 64, message = "Имя персонажа должно быть больше 2 и меньше 64 символов!")
+    public String getName() {
+        return super.getName();
+    }
 
     public void addGroup(String groupName) {
         if (!this.groups.contains(groupName))
