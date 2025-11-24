@@ -1,8 +1,29 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head}"/>
 <body>
 <div th:replace="~{fragments/navbar}"></div><br>
-<div th:replace="~{fragments/creation :: createForm(${weaponModel}, '/weapon/create')}"></div>
+<div class="creation-layout">
+    <form th:action="@{/weapon/create}"
+          th:method="post"
+          th:object="${weaponModel}">
+        <div id="label-and-input">
+            <label for="name">Название:</label>
+            <input type="text"
+                   id="name"
+                   th:field="*{name}"
+                   th:errorclass="is-invalid"
+                   placeholder="Введите название"
+                   required/>
+            <small th:if="${#fields.hasErrors('name')}"
+                   th:errors="*{name}"
+                   class="text-danger">
+            </small>
+        </div>
+        <div id="create-button">
+            <button class="button" type="submit">Создать</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>
