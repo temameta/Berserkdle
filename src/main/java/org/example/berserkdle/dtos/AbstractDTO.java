@@ -4,15 +4,16 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.example.berserkdle.utils.validation.UniqueName;
+import org.hibernate.validator.constraints.UniqueElements;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
 public abstract class AbstractDTO {
-    @NotEmpty(message = "Название не может быть пустым!")
-    @Size(min = 3, message = "Название должно содержать не менее 3 символов!")
     private String name;
 }
