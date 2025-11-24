@@ -9,12 +9,9 @@ import lombok.experimental.SuperBuilder;
 @MappedSuperclass
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @SuperBuilder
 public abstract class AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true, nullable = false)
-    private String name;
 }
