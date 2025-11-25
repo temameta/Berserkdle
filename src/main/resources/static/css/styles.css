@@ -36,14 +36,12 @@ body {
     transition-duration: 0.1s;
     transition-property: background-color;
     transition-timing-function: ease;
-}
-
-.button:hover {
-    background-color: #B5B4B4;
-}
-
-.button:active {
-    background-color: #757474;
+    &:hover {
+        background-color: #B5B4B4;
+    }
+    &:active {
+        background-color: #757474;
+    }
 }
 
 .button-div {
@@ -103,32 +101,32 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-}
 
-.creation-layout label {
-    font-size: 32px;
-    color: white;
-    -webkit-text-stroke: 3px rgba(0, 0, 0, 0.5); /* для Chrome, Safari, Edge */
-    text-stroke: 3px black; /* стандартное свойство (пока слабая поддержка) */
-    paint-order: stroke fill; /* для Firefox */
-}
+    label {
+        font-size: 32px;
+        color: white;
+        -webkit-text-stroke: 3px rgba(0, 0, 0, 0.5); /* для Chrome, Safari, Edge */
+        text-stroke: 3px black; /* стандартное свойство (пока слабая поддержка) */
+        paint-order: stroke fill; /* для Firefox */
+    }
 
-.creation-layout div#label-and-input {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
+    div#label-and-input {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
 
-.creation-layout div#create-button {
-    padding-top: 5px;
-    display: flex;
-    justify-content: flex-end;
-}
+    div#create-button {
+        padding-top: 5px;
+        display: flex;
+        justify-content: flex-end;
+    }
 
-.creation-layout input {
-    flex: 1;
-    min-width: 400px;
-    min-height: 50px;
-    border-radius: 5px;
-    margin-left: 2px;
+    input {
+        flex: 1;
+        min-width: 400px;
+        min-height: 50px;
+        border-radius: 5px;
+        margin-left: 2px;
+    }
 }
