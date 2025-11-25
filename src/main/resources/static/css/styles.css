@@ -102,6 +102,13 @@ body {
     align-items: center;
     justify-content: center;
 
+    h1 {
+        color: white;
+        -webkit-text-stroke: 3px rgba(0, 0, 0, 0.5); /* для Chrome, Safari, Edge */
+        text-stroke: 3px black; /* стандартное свойство (пока слабая поддержка) */
+        paint-order: stroke fill; /* для Firefox */
+    }
+
     label {
         font-size: 32px;
         color: white;
@@ -114,6 +121,18 @@ body {
         display: flex;
         flex-direction: row;
         align-items: center;
+    }
+
+    div#outer-label-and-input {
+        display: flex;
+        flex-direction: column;
+    }
+
+    div#small {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        margin-left: 27%;
     }
 
     div#create-button {
@@ -129,4 +148,15 @@ body {
         border-radius: 5px;
         margin-left: 2px;
     }
+}
+
+.text-danger {
+    color: #a42422;
+}
+
+.text-success {
+    color: aliceblue;
+    -webkit-text-stroke: 3px rgba(0, 0, 0, 0.5); /* для Chrome, Safari, Edge */
+    text-stroke: 3px black; /* стандартное свойство (пока слабая поддержка) */
+    paint-order: stroke fill; /* для Firefox */
 }
