@@ -14,8 +14,19 @@ body {
     background-color: var(--background-color-page);
     display: flex;
     flex-direction: column;
+    justify-content: center;
     height: 100vh;
     margin: 0;
+    gap: 0;
+    padding: 0;
+}
+
+input {
+    flex: 1;
+    min-width: 400px;
+    min-height: 50px;
+    border-radius: 5px;
+    margin-left: 2px;
 }
 
 .navbar-layout {
@@ -28,7 +39,20 @@ body {
 }
 
 .navbar-layout-2 {
-
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-color: black;
+    border-bottom-width: 5px;
+    div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 .chevron-right {
@@ -45,6 +69,24 @@ body {
     background-color: var(--background-color-button);
     border-color: var(--border-color);
     border-width: var(--border-width);
+    border-radius: var(--border-radius);
+    width: 170px;
+    height: 70px;
+    align-items: center;
+    transition-duration: 0.1s;
+    transition-property: background-color;
+    transition-timing-function: ease;
+    &:hover {
+        background-color: var(--background-color-button-hover);
+    }
+    &:active {
+        background-color: var(--background-color-button-active);
+    }
+}
+
+.button-navbar {
+    background-color: white;
+    border-width: 0;
     border-radius: var(--border-radius);
     width: 170px;
     height: 70px;
@@ -117,7 +159,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-
     h1 {
         color: white;
         -webkit-text-stroke: var(--text-stroke-width) var(--text-stroke); /* для Chrome, Safari, Edge */
@@ -156,14 +197,17 @@ body {
         display: flex;
         justify-content: flex-end;
     }
+}
 
-    input {
-        flex: 1;
-        min-width: 400px;
-        min-height: 50px;
-        border-radius: 5px;
-        margin-left: 2px;
-    }
+.main-layout {
+    background-color: white;
+    display: flex;
+    flex: 3;
+    margin-left: 20%;
+    margin-right: 20%;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 3%;
 }
 
 .text-danger {
