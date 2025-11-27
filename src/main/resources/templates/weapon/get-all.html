@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"/>
+<body>
+<div th:replace="~{fragments/navbar}"></div>
+<br>
+<div class="creation-layout">
+    <h1>Получение оружия</h1>
+    <!-- Форма поиска -->
+    <form method="get" action="/weapon/all">
+        <div class="grid">
+            <input type="search"
+                   name="search"
+                   th:value="${search}"
+                   placeholder="Поиск по названию"
+                   aria-label="Поиск">
+            <button type="submit">Найти</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

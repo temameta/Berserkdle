@@ -1,5 +1,17 @@
+:root {
+    --background-color-page: #39a47d;
+    --background-color-button: #dedede;
+    --background-color-button-hover: #B5B4B4;
+    --background-color-button-active: #757474;
+    --border-color: black;
+    --border-radius: 5px;
+    --border-width: 3px;
+    --text-stroke: rgba(0, 0, 0, 0.5);
+    --text-stroke-width: 3px;
+}
+
 body {
-    background-color: #39a47d;
+    background-color: var(--background-color-page);
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -15,6 +27,10 @@ body {
     vertical-align: center;
 }
 
+.navbar-layout-2 {
+
+}
+
 .chevron-right {
     height: 20%;
     width: 10%;
@@ -26,10 +42,10 @@ body {
 
 /* Общие стили для кнопок */
 .button {
-    background-color: #dedede;
-    border-color: #000000;
-    border-width: 3px;
-    border-radius: 5px;
+    background-color: var(--background-color-button);
+    border-color: var(--border-color);
+    border-width: var(--border-width);
+    border-radius: var(--border-radius);
     width: 170px;
     height: 70px;
     align-items: center;
@@ -37,10 +53,10 @@ body {
     transition-property: background-color;
     transition-timing-function: ease;
     &:hover {
-        background-color: #B5B4B4;
+        background-color: var(--background-color-button-hover);
     }
     &:active {
-        background-color: #757474;
+        background-color: var(--background-color-button-active);
     }
 }
 
@@ -104,16 +120,16 @@ body {
 
     h1 {
         color: white;
-        -webkit-text-stroke: 3px rgba(0, 0, 0, 0.5); /* для Chrome, Safari, Edge */
-        text-stroke: 3px black; /* стандартное свойство (пока слабая поддержка) */
+        -webkit-text-stroke: var(--text-stroke-width) var(--text-stroke); /* для Chrome, Safari, Edge */
+        text-stroke: var(--text-stroke-width) var(--text-stroke); /* стандартное свойство (пока слабая поддержка) */
         paint-order: stroke fill; /* для Firefox */
     }
 
     label {
         font-size: 32px;
         color: white;
-        -webkit-text-stroke: 3px rgba(0, 0, 0, 0.5); /* для Chrome, Safari, Edge */
-        text-stroke: 3px black; /* стандартное свойство (пока слабая поддержка) */
+        -webkit-text-stroke: var(--text-stroke-width) var(--text-stroke); /* для Chrome, Safari, Edge */
+        text-stroke: var(--text-stroke-width) var(--text-stroke); /* стандартное свойство (пока слабая поддержка) */
         paint-order: stroke fill; /* для Firefox */
     }
 
@@ -156,7 +172,7 @@ body {
 
 .text-success {
     color: aliceblue;
-    -webkit-text-stroke: 3px rgba(0, 0, 0, 0.5); /* для Chrome, Safari, Edge */
-    text-stroke: 3px black; /* стандартное свойство (пока слабая поддержка) */
+    -webkit-text-stroke: var(--text-stroke-width) var(--text-stroke); /* для Chrome, Safari, Edge */
+    text-stroke: var(--text-stroke-width) var(--text-stroke); /* стандартное свойство (пока слабая поддержка) */
     paint-order: stroke fill; /* для Firefox */
 }
