@@ -2,6 +2,8 @@ package org.example.berserkdle.services;
 
 import org.example.berserkdle.dtos.AbstractDTO;
 import org.example.berserkdle.entities.AbstractEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,4 +20,5 @@ public interface InterfaceService<D extends AbstractDTO, E extends AbstractEntit
     void save(D DTO);
     void save(List<D> DTOs);
     boolean existsByName(String name);
+    Page<D> allPaginated(Pageable pageable);
 }

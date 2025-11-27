@@ -5,6 +5,9 @@ import org.example.berserkdle.dtos.AbstractDTO;
 import org.example.berserkdle.entities.AbstractEntity;
 import org.example.berserkdle.repositories.AbstractRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -76,5 +79,16 @@ public abstract class AbstractService<D extends AbstractDTO, E extends AbstractE
     @Override
     public boolean existsByName(String name) {
         return repository.existsByName(name);
+    }
+
+    @Transactional
+    @Override
+    public Page<D> allPaginated(Pageable pageable) {
+        List<D> allDTOs = findAll();
+        int start = (int) pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), allDTOs.size());
+
+        List<D> pageContent = allDTOs.subList(start, end);
+        return new PageImpl<>(pageContent, pageable, allDTOs.size());
     }
 }
