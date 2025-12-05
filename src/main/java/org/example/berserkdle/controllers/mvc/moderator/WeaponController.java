@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/weapon")
+@RequestMapping("/moderator/weapon")
 public class WeaponController {
     private final WeaponService weaponService;
 
@@ -38,18 +38,24 @@ public class WeaponController {
             Model model
     ) {
         if (search != null && !search.trim().isEmpty()) {
-            model.addAttribute("weapon", weaponService.findByName(search));
+            model.addAttribute("weapons", weaponService.findByName(search));
             model.addAttribute("search", search);
         } else {
             Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).ascending());
             Page<WeaponDTO> weaponPage = weaponService.allPaginated(pageable);
 
-            model.addAttribute("weapon", weaponPage.getContent());
+            model.addAttribute("weapons", weaponPage.getContent());
             model.addAttribute("currentPage", page);
             model.addAttribute("totalPages", weaponPage.getTotalPages());
             model.addAttribute("totalItems", weaponPage.getTotalElements());
         }
         return "weapon/get-all";
+    }
+
+    @GetMapping("/{name}")
+    public String getWeapon(@PathVariable String name, Model model) {
+        model.addAttribute("weapon", weaponService.findByName(name));
+        return "weapon/weapon-page";
     }
 
     @GetMapping("/create")
@@ -70,9 +76,24 @@ public class WeaponController {
         return "redirect:/weapon/create";
     }
 
-    @GetMapping("/update")
-    public String update() {
-        return "";
+    @GetMapping("/{name}/update")
+    public String update(@PathVariable String name, Model model) {
+        model.addAttribute("weapon", weaponService.findByName(name));
+        System.out.println();
+        return "weapon/update";
+    }
+
+    @PutMapping("/{name}/update")
+    public String update(@Valid WeaponDTO weaponModel, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            //log.warn("Ошибки валидации при добавлении компании: {}", bindingResult.getAllErrors());
+            redirectAttributes.addFlashAttribute("weaponModel", weaponModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.weaponModel", bindingResult);
+            return "redirect:/weapon/create";
+        }
+        weaponService.save(weaponService.findByName(weaponModel.getName()));
+        redirectAttributes.addFlashAttribute("successMessage", "Оружие " + weaponModel.getName() + " успешно обновлено!!");
+        return "redirect:/weapon/update";
     }
 
     @GetMapping("/delete")
