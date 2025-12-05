@@ -12,7 +12,7 @@
                        th:value="${search}"
                        placeholder="Поиск по названию"
                        aria-label="Поиск">
-                <button class="button border" type="submit">Найти</button>
+                <button class="border" type="submit">Найти</button>
             </div>
         </form>
         <!-- Список оружий -->
@@ -21,7 +21,7 @@
                 <h3 th:text="${w.name}"></h3>
             </a>
         </div>
-        <p th:if="${#lists.isEmpty(weapons)}" class="text-center">
+        <p th:if="${#lists.isEmpty(weapons)}">
             <em>Компании не найдены. Попробуйте изменить критерии поиска или добавьте новую компанию!</em>
         </p>
         <!-- Пагинация -->
@@ -43,8 +43,8 @@
         </nav>
     </div>
     <!-- Кнопка создания -->
-    <a href="/weapon/create" id="create-button">
-        <button class="button border">Создать</button>
+    <a href="/moderator/weapon/create" id="create-button">
+        <button class="border">Создать</button>
     </a>
 </main>
 </body>
