@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ModeratorController {
     @GetMapping()
     public String home() {
-        return "moderator/moderator";
+        return "redirect:/moderator/weapon/all";
     }
 }
