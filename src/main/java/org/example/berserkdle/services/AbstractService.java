@@ -1,6 +1,5 @@
 package org.example.berserkdle.services;
 
-import lombok.RequiredArgsConstructor;
 import org.example.berserkdle.dtos.AbstractDTO;
 import org.example.berserkdle.entities.AbstractEntity;
 import org.example.berserkdle.repositories.AbstractRepository;
