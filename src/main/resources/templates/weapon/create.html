@@ -2,38 +2,33 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head}"/>
 <body>
-<div th:replace="~{fragments/navbar}"></div>
-<br>
-<div class="creation-layout">
+<nav th:replace="~{fragments/navbar2}"></nav>
+<main class="create">
     <h1>Создание оружия</h1>
-    <form th:action="@{/weapon/create}"
+    <form th:action="@{/moderator/weapon/create}"
           th:method="post"
           th:object="${weaponModel}">
-        <div id="outer-label-and-input">
-            <div id="label-and-input">
-                <label for="name">Название:</label>
-                <input type="text"
-                       id="name"
-                       th:field="*{name}"
-                       th:errorclass="is-invalid"
-                       placeholder="Введите название"
-                       required/>
-            </div>
-            <div id="small">
-                <small th:if="${#fields.hasErrors('name')}"
-                       th:errors="*{name}"
-                       class="text-danger">
-                </small>
-                <small th:if="${successMessage}"
-                       th:text="${successMessage}"
-                       class="text-success">
-                </small>
-            </div>
+        <div id="input">
+            <input type="text"
+                   id="name"
+                   th:field="*{name}"
+                   th:errorclass="is-invalid"
+                   placeholder="Введите название"
+                   aria-label="Название"
+                   required/>
+            <small th:if="${#fields.hasErrors('name')}"
+                   th:errors="*{name}"
+                   class="danger-text">
+            </small>
+            <small th:if="${successMessage}"
+                   th:text="${successMessage}"
+                   class="success-text">
+            </small>
         </div>
         <div id="create-button">
-            <button class="button" type="submit">Создать</button>
+            <button class="border" type="submit">Создать</button>
         </div>
     </form>
-</div>
+</main>
 </body>
 </html>
