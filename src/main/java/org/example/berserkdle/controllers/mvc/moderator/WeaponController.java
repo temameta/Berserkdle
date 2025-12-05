@@ -69,11 +69,11 @@ public class WeaponController {
             //log.warn("Ошибки валидации при добавлении компании: {}", bindingResult.getAllErrors());
             redirectAttributes.addFlashAttribute("weaponModel", weaponModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.weaponModel", bindingResult);
-            return "redirect:/weapon/create";
+            return "redirect:/moderator/weapon/create";
         }
         weaponService.save(weaponModel);
         redirectAttributes.addFlashAttribute("successMessage", "Оружие " + weaponModel.getName() + " успешно добавлено!");
-        return "redirect:/weapon/create";
+        return "redirect:/moderator/weapon/create";
     }
 
     @GetMapping("/{name}/update")
