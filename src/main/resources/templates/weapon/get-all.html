@@ -17,7 +17,7 @@
         </form>
         <!-- Список оружий -->
         <div th:each="w : ${weapons}" class="card">
-            <a th:href="@{/weapon/{weapon-name}(weapon-name=${w.name})}">
+            <a th:href="@{/moderator/weapon/{weapon-name}(weapon-name=${w.name})}">
                 <h3 th:text="${w.name}"></h3>
             </a>
         </div>
