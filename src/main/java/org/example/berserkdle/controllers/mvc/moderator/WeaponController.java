@@ -73,7 +73,7 @@ public class WeaponController {
 
     @PostMapping("/create")
     public String create(@Valid WeaponDTO weaponModel, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        log.info("Запрос на создание нового оружия");
+        log.info("Запрос на создание нового оружия {}", weaponModel.getName());
         if (bindingResult.hasErrors()) {
             log.error("Название оружия {} некорректно", weaponModel.getName());
             log.error("Полный текст ошибок: {}", bindingResult.getAllErrors());
@@ -81,9 +81,9 @@ public class WeaponController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.weaponModel", bindingResult);
             return "redirect:/moderator/weapon/create";
         }
-        log.info("Создание нового оружия...");
+        log.info("Создание нового оружия {}...", weaponModel.getName());
         weaponService.save(weaponModel);
-        log.info("Оружие успешно создано!");
+        log.info("Оружие успешно {} создано!", weaponModel.getName());
         redirectAttributes.addFlashAttribute("successMessage", "Оружие " + weaponModel.getName() + " успешно добавлено!");
         return "redirect:/moderator/weapon/create";
     }
