@@ -29,6 +29,14 @@
 
 }
 
+.danger-text {
+    color: var(--danger-text-color);
+}
+
+.success-text {
+    color: var(--success-text-color);
+}
+
 body {
     background-color: var(--background-color-page);
     display: flex;
@@ -88,6 +96,7 @@ main {
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
+
     #search {
         flex-direction: row;
     }
@@ -136,12 +145,14 @@ main {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
     & div {
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
     }
+
     hr {
         width: 99%;
         margin: 0;
