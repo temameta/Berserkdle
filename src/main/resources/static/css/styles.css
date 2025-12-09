@@ -188,6 +188,40 @@ main {
     }
 }
 
+.person-page {
+    .header {
+        display: flex;
+        flex-direction: row;
+        height: fit-content;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+    .items-and-buttons {
+        display: flex;
+        flex-direction: row;
+        padding-right: 10%;
+        padding-left: 10%;
+
+        .items {
+            display: flex;
+            flex-direction: column;
+
+            .item {
+                display: flex;
+                flex-direction: row;
+            }
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            justify-content: flex-end;
+        }
+
+    }
+}
+
 @media (max-width: 1600px) {
     input {
         width: calc(var(--input-width) * 0.75);

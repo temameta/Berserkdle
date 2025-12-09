@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"/>
+<body>
+<nav th:replace="~{fragments/navbar2}"></nav>
+<main class="person-page">
+    <div class="header">
+        <h2 th:text="${person.name}"></h2>
+    </div>
+    <div class="items-and-buttons">
+        <div class="items">
+        <div class="item">
+            <span>Арка первого появления:</span>
+            <span th:text="${person.arc}"></span>
+        </div>
+        <div class="item">
+            <span>Раса:</span>
+            <span th:text="${person.species}"></span>
+        </div>
+        <div class="item">
+            <span>Пол:</span>
+            <span th:text="${person.gender}"></span>
+        </div>
+        <div class="item">
+            <span>Оружия:</span>
+            <div th:each="w : ${person.weapons}">
+                <span th:text="${w.name}"></span>
+            </div>
+        </div>
+        <div class="item">
+            <span>Оружия:</span>
+            <div th:each="g : ${person.groups}">
+                <span th:text="${g.name}"></span>
+            </div>
+        </div>
+        </div>
+        <div class="buttons">
+            <a th:href="@{/moderator/person/{name}/update(name=${person.name})}"><button class="border">Изменить</button></a>
+            <a th:href="@{/moderator/person/{name}/delete(name=${person.name})}"><button class="border">Удалить</button></a>
+        </div>
+    </div>
+</main>
+</body>
+</html>
