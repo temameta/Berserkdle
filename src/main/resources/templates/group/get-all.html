@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"/>
+<body>
+<nav th:replace="~{fragments/navbar2}"></nav>
+<main class="all">
+    <div class="cards">
+        <form method="get" action="/group/all">
+            <div id="search">
+                <input type="search"
+                       name="search"
+                       th:value="${search}"
+                       placeholder="Поиск по названию"
+                       aria-label="Поиск">
+                <button class="border" type="submit">Найти</button>
+            </div>
+        </form>
+        <!-- Список оружий -->
+        <div th:each="a : ${groups}" class="card">
+            <a th:href="@{/moderator/group/{group-name}(group-name=${a.name})}">
+                <h3 th:text="${a.name}"></h3>
+            </a>
+        </div>
+        <p th:if="${#lists.isEmpty(groups)}">
+            <em>Группы не найдены. Попробуйте изменить критерии поиска или добавьте новую группу!</em>
+        </p>
+        <!-- Пагинация -->
+        <nav th:if="${totalPages != null && totalPages > 1}" aria-label="Pagination">
+            <ul style="display: flex; justify-content: center; list-style: none; padding: 0;">
+                <li th:if="${currentPage > 0}">
+                    <a th:href="@{/group/all(page=${currentPage - 1}, size=10)}" role="button"
+                       class="outline">Назад</a>
+                </li>
+                <li style="margin: 0 1rem; align-self: center;">
+                    <span>Страница<strong th:text="${currentPage + 1}"></strong> из <strong
+                            th:text="${totalPages}"></strong></span>
+                </li>
+                <li th:if="${currentPage + 1 < totalPages}">
+                    <a th:href="@{/group/all(page=${currentPage + 1}, size=10)}" role="button"
+                       class="outline">Вперед</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <!-- Кнопка создания -->
+    <a href="/moderator/group/create" id="create-button">
+        <button class="border">Создать</button>
+    </a>
+</main>
+</body>
+</html>

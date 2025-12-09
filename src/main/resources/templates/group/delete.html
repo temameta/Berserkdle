@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"/>
+<body>
+<nav th:replace="~{fragments/navbar2}"></nav>
+<main class="delete">
+    <form th:action="@{/moderator/group/{name}/delete(name = ${group.name})}"
+          th:method="post"
+          th:object="${group}">
+        <h1 th:text="|Удалить группу ${group.name}?|"></h1>
+        <small th:if="${#fields.hasErrors('name')}"
+               th:errors="*{name}"
+               class="danger-text">
+        </small>
+        <small th:if="${successMessage}"
+               th:text="${successMessage}"
+               class="success-text">
+        </small>
+        <button class="border" type="submit">Удалить</button>
+    </form>
+</main>
+</body>
+</html>
