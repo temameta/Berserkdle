@@ -97,7 +97,7 @@ public class WeaponController {
 
     @PostMapping("/{name}/update")
     public String update(@Valid WeaponDTO weaponModel, BindingResult bindingResult, RedirectAttributes redirectAttributes, @PathVariable String name) {
-        log.info("Запрос на обновление оружия {}", weaponModel.getName());
+        log.info("Запрос на обновление оружия {}", name);
         if (bindingResult.hasErrors()) {
             log.error("Название оружия {} некорректно", weaponModel.getName());
             log.error("Полный текст ошибок: {}", bindingResult.getAllErrors());
@@ -105,9 +105,9 @@ public class WeaponController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.weaponModel", bindingResult);
             return "redirect:/moderator/weapon/{name}/update";
         }
-        log.info("Обновление оружия {}...", weaponModel.getName());
+        log.info("Обновление оружия {}...", name);
         weaponService.update(name, weaponModel.getName());
-        log.info("Оружие {} успешно обновлено! Новое название: {}", weaponModel.getName(), name);
+        log.info("Оружие {} успешно обновлено! Новое название: {}", name, weaponModel.getName());
         redirectAttributes.addFlashAttribute("successMessage", "Оружие " + weaponModel.getName() + " успешно обновлено!");
         return "redirect:/moderator/weapon/all";
     }
