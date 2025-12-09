@@ -78,26 +78,34 @@ public class WeaponController {
 
     @GetMapping("/{name}/update")
     public String update(@PathVariable String name, Model model) {
-        model.addAttribute("weapon", weaponService.findByName(name));
-        System.out.println();
+
+        model.addAttribute("oldName", name);
         return "weapon/update";
     }
 
-    @PutMapping("/{name}/update")
-    public String update(@Valid WeaponDTO weaponModel, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    @PostMapping("/{name}/update")
+    public String update(@Valid WeaponDTO weaponModel, BindingResult bindingResult, RedirectAttributes redirectAttributes, @PathVariable String name) {
         if (bindingResult.hasErrors()) {
             //log.warn("Ошибки валидации при добавлении компании: {}", bindingResult.getAllErrors());
             redirectAttributes.addFlashAttribute("weaponModel", weaponModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.weaponModel", bindingResult);
-            return "redirect:/weapon/create";
+            return "redirect:/moderator/weapon/{name}/update";
         }
-        weaponService.save(weaponService.findByName(weaponModel.getName()));
-        redirectAttributes.addFlashAttribute("successMessage", "Оружие " + weaponModel.getName() + " успешно обновлено!!");
-        return "redirect:/weapon/update";
+        weaponService.update(name, weaponModel.getName());
+        redirectAttributes.addFlashAttribute("successMessage", "Оружие " + weaponModel.getName() + " успешно обновлено!");
+        return "redirect:/moderator/weapon/all";
     }
 
-    @GetMapping("/delete")
-    public String delete() {
-        return "";
+    @GetMapping("/{name}/delete")
+    public String delete(@PathVariable String name, Model model) {
+        model.addAttribute("weapon", weaponService.findByName(name));
+        return "weapon/delete";
+    }
+
+    @PostMapping("/{name}/delete")
+    public String delete(WeaponDTO weapon, RedirectAttributes redirectAttributes, @PathVariable String name) {
+        weaponService.delete(weapon);
+        redirectAttributes.addFlashAttribute("successMessage", "Оружие " + weapon.getName() + " успешно удалено!");
+        return "redirect:/moderator/weapon/all";
     }
 }

@@ -8,4 +8,5 @@ import org.springframework.data.repository.NoRepositoryBean;
 public interface AbstractRepository<E extends AbstractEntity> extends JpaRepository<E, Long> {
     E findByName(String name);
     boolean existsByName(String name);
+    void deleteByName(String name);
 }

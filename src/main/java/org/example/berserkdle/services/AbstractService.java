@@ -90,4 +90,16 @@ public abstract class AbstractService<D extends AbstractDTO, E extends AbstractE
         List<D> pageContent = allDTOs.subList(start, end);
         return new PageImpl<>(pageContent, pageable, allDTOs.size());
     }
+
+    @Transactional
+    public void update(String oldName, String newName) {
+        E entity = repository.findByName(oldName);
+        entity.setName(newName);
+        repository.save(entity);
+    }
+
+    @Transactional
+    public void delete(D DTO) {
+        repository.deleteByName(DTO.getName());
+    }
 }
