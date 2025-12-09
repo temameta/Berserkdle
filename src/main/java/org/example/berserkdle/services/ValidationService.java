@@ -23,7 +23,6 @@ public class ValidationService {
     }
 
     public boolean isExist(String className, String name) {
-        System.out.println(className);
         return switch(className) {
             case "WeaponDTO" -> weaponService.existsByName(name);
             case "ArcDTO" -> arcService.existsByName(name);
