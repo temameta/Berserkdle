@@ -1,5 +1,6 @@
 package org.example.berserkdle.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.berserkdle.dtos.AbstractDTO;
 import org.example.berserkdle.entities.AbstractEntity;
 import org.example.berserkdle.repositories.AbstractRepository;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 public abstract class AbstractService<D extends AbstractDTO, E extends AbstractEntity, R extends AbstractRepository<E>> implements InterfaceService<D, E> {
     protected final R repository;
 
@@ -101,5 +103,12 @@ public abstract class AbstractService<D extends AbstractDTO, E extends AbstractE
     @Transactional
     public void delete(D DTO) {
         repository.deleteByName(DTO.getName());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<E> search(String name) {
+        log.info("Лог из сервиса: поиск сущности");
+        return repository.findByNameContainingIgnoreCase(name);
     }
 }

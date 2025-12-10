@@ -21,4 +21,5 @@ public interface InterfaceService<D extends AbstractDTO, E extends AbstractEntit
     void save(List<D> DTOs);
     boolean existsByName(String name);
     Page<D> allPaginated(Pageable pageable);
+    List<E> search(String name);
 }
