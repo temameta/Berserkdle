@@ -26,9 +26,9 @@ public class PersonEntity extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "species_id", nullable = false)
     private SpeciesEntity species;
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<PersonWithGroupEntity> groups = new ArrayList<>();
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<PersonWithWeaponEntity> weapons = new ArrayList<>();
 
     public void addGroup(PersonWithGroupEntity personWithGroupEntity) {

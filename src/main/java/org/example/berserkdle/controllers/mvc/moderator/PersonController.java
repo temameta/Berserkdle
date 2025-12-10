@@ -62,6 +62,7 @@ public class PersonController {
     public String getPerson(@PathVariable String name, Model model) {
         log.info("Открыта персональная страница персонажа {}", name);
         model.addAttribute("person", personService.findByName(name));
+        System.out.println(personService.findByName(name));
         return "person/person-page";
     }
 
@@ -74,6 +75,7 @@ public class PersonController {
     @PostMapping("/create")
     public String create(@Valid PersonDTO personModel, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         log.info("Запрос на создание новой персонажа {}", personModel.getName());
+        System.out.println(personModel);
         if (bindingResult.hasErrors()) {
             log.error("Название персонажа {} некорректно", personModel.getName());
             log.error("Полный текст ошибок: {}", bindingResult.getAllErrors());

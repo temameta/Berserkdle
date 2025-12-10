@@ -24,13 +24,13 @@
             <div class="item">
                 <span>Оружия:</span>
                 <div th:each="w : ${person.weapons}">
-                    <span th:text="${w.name}"></span>
+                    <span th:text="${w}"></span>
                 </div>
             </div>
             <div class="item">
-                <span>Оружия:</span>
+                <span>Группы:</span>
                 <div th:each="g : ${person.groups}">
-                    <span th:text="${g.name}"></span>
+                    <span th:text="${g}"></span>
                 </div>
             </div>
         </div>
