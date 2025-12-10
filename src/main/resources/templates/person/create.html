@@ -5,14 +5,14 @@
 <body>
 <nav th:replace="~{fragments/navbar2}"></nav>
 <main class="create-person">
-    <h1 class="mb-4">Создание персонажа</h1>
+    <h1>Создание персонажа</h1>
 
     <form th:action="@{/moderator/person/create}"
           th:object="${personModel}"
           method="post"
           id="personForm">
         <!-- Имя -->
-        <div class="mb-3">
+        <div class="label-container">
             <label for="name" class="form-label">Имя:</label>
             <input type="text" class="form-control" id="name" th:field="*{name}"
                    placeholder="Введите имя">
@@ -21,8 +21,8 @@
             </div>
         </div>
 
-        <!-- Пол с автодополнением -->
-        <div class="mb-3">
+        <!-- Пол -->
+        <div class="label-container">
             <label class="form-label">Пол:</label>
             <input type="text" class="form-control autocomplete-input"
                    id="genderInput"
@@ -35,8 +35,8 @@
             </div>
         </div>
 
-        <!-- Арка с автодополнением -->
-        <div class="mb-3">
+        <!-- Арка -->
+        <div class="label-container">
             <label class="form-label">Арка:</label>
             <input type="text" class="form-control autocomplete-input"
                    id="firstArcInput"
@@ -49,8 +49,8 @@
             </div>
         </div>
 
-        <!-- Раса с автодополнением -->
-        <div class="mb-3">
+        <!-- Раса -->
+        <div class="label-container">
             <label class="form-label">Раса:</label>
             <input type="text" class="form-control autocomplete-input"
                    id="speciesInput"
@@ -63,8 +63,8 @@
             </div>
         </div>
 
-        <!-- Оружие (множественный выбор) -->
-        <div class="mb-3">
+        <!-- Оружие -->
+        <div class="label-container">
             <label class="form-label">Оружие:</label>
             <div class="input-group">
                 <input type="text" class="form-control autocomplete-input"
@@ -84,8 +84,8 @@
             <input type="hidden" id="weapons" th:field="*{weapons}">
         </div>
 
-        <!-- Группы (множественный выбор) -->
-        <div class="mb-3">
+        <!-- Группы -->
+        <div class="label-container">
             <label class="form-label">Группы:</label>
             <div class="input-group">
                 <input type="text" class="form-control autocomplete-input"
