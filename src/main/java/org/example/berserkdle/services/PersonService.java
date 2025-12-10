@@ -39,16 +39,12 @@ public class PersonService extends AbstractService<PersonDTO, PersonEntity, Pers
     }
     @Override
     public void save(PersonDTO DTO) {
-        // Сначала сохраняем персону
         PersonEntity personEntity = toEntity(DTO);
-        repository.save(personEntity); // Теперь у personEntity будет ID
-
-        // Затем создаем и сохраняем связи
+        repository.save(personEntity);
         createPersonAssociations(DTO, personEntity);
     }
 
     private void createPersonAssociations(PersonDTO personDTO, PersonEntity personEntity) {
-        // Создаем связи с оружиями
         for (String weaponName : personDTO.getWeapons()) {
             WeaponEntity weaponEntity = weaponRepository.findByName(weaponName);
             if (weaponEntity != null) {
