@@ -5,6 +5,8 @@ import org.example.berserkdle.entities.*;
 import org.example.berserkdle.repositories.*;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PersonService extends AbstractService<PersonDTO, PersonEntity, PersonRepository>{
     private final PersonWithGroupRepository personWithGroupRepository;
@@ -85,5 +87,9 @@ public class PersonService extends AbstractService<PersonDTO, PersonEntity, Pers
             personDTO.addWeapon(weaponRepository.findById(personWithWeaponEntity.getWeapon().getId()).get().getName());
         }
         return personDTO;
+    }
+
+    public List<String> getAllNames() {
+        return repository.getAllNames();
     }
 }

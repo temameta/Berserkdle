@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{fragments/user-head}"/>
+<body>
+<main class="main">
+    <h1>Berserkdle</h1>
+    <p>Угадай персонажа</p>
+    <form th:action="@{/}">
+        <input type="text" class="form-control autocomplete-input"
+               id="speciesInput"
+               placeholder="Введите расу"
+               data-search-url="/api/species/search">
+        <input type="hidden" id="species" th:field="*{species}">
+        <div class="autocomplete-items" id="speciesAutocompleteList"></div>
+        <button class="border">Угадать</button>
+    </form>
+    <br>
+    <div class="guessed">
+
+    </div>
+    <br>
+    <div class="legend">
+        <p>Обозначения цветов</p>
+        <div class="colors">
+            <div class="color wrong">Неверно</div>
+            <div class="color partially-correct">Верно частично</div>
+            <div class="color correct">Верно</div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
