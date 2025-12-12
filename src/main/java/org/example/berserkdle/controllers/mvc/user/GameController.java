@@ -31,7 +31,7 @@ public class GameController {
 
     // Ключ для хранения загаданного персонажа в сессии
     private static final String SECRET_PERSON_KEY = "secretPerson";
-    private static final String GUESSED_PERSONS_KEY = "guessedPersons";
+    private static final String GUESSED_PERSONS_KEY = "guessedPersons1";
 
     @Autowired
     public GameController(PlayerStatisticService statisticService, GameService gameService, PersonService personService) {
@@ -57,10 +57,9 @@ public class GameController {
         model.addAttribute("requestedPerson", new RequestedPersonDto());
         model.addAttribute("allPersonsNames", personService.getAllNames());
 
-        System.out.println(session.getAttribute(GUESSED_PERSONS_KEY).toString());
-
         @SuppressWarnings("unchecked")
         List<ResultDto> guessedPersons = (List<ResultDto>) session.getAttribute(GUESSED_PERSONS_KEY);
+
         model.addAttribute("guessedPersons", guessedPersons);
 
         if (guessedPersons != null && !guessedPersons.isEmpty()) {

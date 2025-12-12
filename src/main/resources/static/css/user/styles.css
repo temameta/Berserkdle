@@ -92,6 +92,7 @@ input {
     min-height: 100px;
     color: white;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-wrap: auto;
@@ -103,6 +104,11 @@ input {
     }
     &.correct {
         background-color: var(--correct-color);
+    }
+    &.white {
+        color: black;
+        border-color: black;
+        border-width: 5px;
     }
 }
 
@@ -120,31 +126,16 @@ input {
         background-color: var(--background-color-items);
         padding: 2%;
     }
-    .guessed {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
 
-    .guess-row {
-        margin-bottom: 10px;
-        display: flex;
-        flex-direction: row;
-    }
+    table {
+        border-collapse: collapse;
+        border: 2px solid rgb(140 140 140);
 
-    .attribute-container {
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        gap: 5px;
-        margin-bottom: 5px;
-    }
-
-    .table-header {
-        display: flex;
-        flex-direction: row;
-        gap: 40px;
-        font-weight: bold;
-        text-align: center;
+        th,
+        td {
+            border: 1px solid rgb(160 160 160);
+            padding: 0;
+        }
     }
 }
 

@@ -18,7 +18,7 @@ public class ResultDto {
     public enum MatchStatus {
         CORRECT,
         PARTIAL,
-        WRONG
+        WRONG;
     }
 
     public boolean isFullyCorrect() {

@@ -6,7 +6,9 @@
     <h1>Berserkdle</h1>
 
     <div>
-        <a href="/users/profile"><button class="border">Профиль</button></a>
+        <a href="/users/profile">
+            <button class="border">Профиль</button>
+        </a>
     </div>
 
     <p>Угадай персонажа</p>
@@ -23,59 +25,72 @@
         <button type="submit" class="border">Угадать</button>
     </form>
 
-    <br>
+    <div th:unless="${not gameWon}">
+        Вы победили!
+    </div>
 
-    <div class="guessed" th:if="${not guessedPersons.isEmpty()}">
-        <div class="table-header">
-            <div class="header-cell">Имя</div>
-            <div class="header-cell">Пол</div>
-            <div class="header-cell">Группа</div>
-            <div class="header-cell">Раса</div>
-            <div class="header-cell">Оружие</div>
-            <div class="header-cell">Арка</div>
-        </div>
-        <div th:each="guess : ${guessedPersons}" class="guess-row">
-            <div class="attribute-container">
+    <br>
+        <table th:if="${not guessedPersons.isEmpty()}">
+            <thead>
+            <tr>
+                <th scope="col">Имя</th>
+                <th scope="col">Пол</th>
+                <th scope="col">Группа</th>
+                <th scope="col">Раса</th>
+                <th scope="col">Оружие</th>
+                <th scope="col">Арка</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="guess : ${guessedPersons}">
                 <!-- Имя персонажа -->
-                <div class="color">
-                    <span th:text="${guess.requestedPersonDto.name}"></span>
-                </div>
+                <th scope="row">
+                    <div th:text="${guess.requestedPersonDto.name}"
+                         class="color white"></div>
+                </th>
 
                 <!-- Пол -->
-                <div th:classappend="${guess.genderMatch == 'CORRECT'} ? 'correct' : 'wrong'"
-                     class="color">
-                    <span th:text="${guess.requestedPersonDto.gender}"></span>
-                </div>
+                <td>
+                    <div th:text="${guess.requestedPersonDto.gender}"
+                         class="color"
+                         th:classappend="${guess.genderMatch.toString() == 'CORRECT'} ? 'correct' : 'wrong'"></div>
+                </td>
 
                 <!-- Раса -->
-                <div th:classappend="${guess.speciesMatch == 'CORRECT'} ? 'correct' :
-                                        (${guess.speciesMatch == 'PARTIAL'} ? 'partially-correct' : 'wrong')"
-                     class="color">
-                    <span th:text="${guess.requestedPersonDto.species}"></span>
-                </div>
+                <td>
+                    <div th:classappend="${guess.speciesMatch.toString() == 'CORRECT'} ? 'correct' :
+                                        (${guess.speciesMatch.toString() == 'PARTIAL'} ? 'partially-correct' : 'wrong')"
+                         class="color"
+                         th:text="${guess.requestedPersonDto.species}"></div>
+                </td>
 
                 <!-- Группа -->
-                <div th:classappend="${guess.groupMatch == 'CORRECT'} ? 'correct' :
-                                        (${guess.groupMatch == 'PARTIAL'} ? 'partially-correct' : 'wrong')"
-                     class="color">
-                    <span th:each="group : ${guess.requestedPersonDto.groups}" th:text="${group}"></span>
-                </div>
+                <td>
+                    <div th:classappend="${guess.groupMatch.toString() == 'CORRECT'} ? 'correct' :
+                                        (${guess.groupMatch.toString() == 'PARTIAL'} ? 'partially-correct' : 'wrong')"
+                         class="color">
+                        <span th:each="group : ${guess.requestedPersonDto.groups}" th:text="${group}"></span>
+                    </div>
+                </td>
 
                 <!-- Оружие -->
-                <div th:classappend="${guess.weaponMatch == 'CORRECT'} ? 'correct' :
-                                        (${guess.weaponMatch == 'PARTIAL'} ? 'partially-correct' : 'wrong')"
-                     class="color">
-                    <span th:each="weapon : ${guess.requestedPersonDto.weapons}" th:text="${weapon}"></span>
-                </div>
+                <td>
+                    <div th:classappend="${guess.weaponMatch.toString() == 'CORRECT'} ? 'correct' :
+                                        (${guess.weaponMatch.toString() == 'PARTIAL'} ? 'partially-correct' : 'wrong')"
+                         class="color">
+                        <span th:each="weapon : ${guess.requestedPersonDto.weapons}" th:text="${weapon}"></span>
+                    </div>
+                </td>
 
                 <!-- Арка -->
-                <div th:classappend="${guess.arcMatch == 'CORRECT'} ? 'correct' : 'wrong'"
-                     class="color">
-                    <span th:text="${guess.requestedPersonDto.arc}"></span>
-                </div>
-            </div>
-        </div>
-    </div>
+                <td>
+                    <div th:classappend="${guess.arcMatch.toString() == 'CORRECT'} ? 'correct' : 'wrong'"
+                         class="color"
+                         th:text="${guess.requestedPersonDto.arc}"></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
     <br>
 

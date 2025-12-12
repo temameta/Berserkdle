@@ -46,7 +46,8 @@ public class GameService {
         requestedPersonDto.setArc(personFromBase.getFirstArc());
         requestedPersonDto.setWeapons(personFromBase.getWeapons());
         requestedPersonDto.setGroups(personFromBase.getGroups());
-        resultDto.setRequestedPersonDto(requestedPerson);
+        requestedPersonDto.setSpecies(personFromBase.getSpecies());
+        resultDto.setRequestedPersonDto(requestedPersonDto);
 
         if (personFromBase != null) {
             if (personFromBase.getFirstArc().equalsIgnoreCase(hiddenPerson.getFirstArc())) {
