@@ -83,6 +83,12 @@ public class AuthController {
         return "login";
     }
 
+    @GetMapping("/logout")
+    public String logout() {
+        log.debug("Выход из аккаунта");
+        return "redirect:/users/login";
+    }
+
     @PostMapping("/login-error")
     public String onFailedLogin(
             @ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY) String username,
