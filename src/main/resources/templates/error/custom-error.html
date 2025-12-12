@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"/>
+<body>
+<main class="error">
+    <article class="text-center">
+        <hgroup>
+            <h1>Произошла ошибка</h1>
+            <h2 th:text="${errorCode}"></h2>
+        </hgroup>
+        <div>
+            <a href="/"><button class="border">Вернуться на главную</button></a>
+        </div>
+    </article>
+</main>
+</body>
+</html>
