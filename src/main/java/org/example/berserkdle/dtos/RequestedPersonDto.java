@@ -1,18 +1,17 @@
 package org.example.berserkdle.dtos;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Map;
+import java.util.List;
 
-@Setter
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@Setter
 public class RequestedPersonDto {
-    private String name = null;
-    private Map<String, Boolean> params = null;
-
+    private String name;
+    private String gender;
+    private List<String> groups;
+    private String species;
+    private List<String> weapons;
+    private String arc;
 }

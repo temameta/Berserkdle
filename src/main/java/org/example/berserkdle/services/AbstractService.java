@@ -5,6 +5,7 @@ import org.example.berserkdle.dtos.AbstractDTO;
 import org.example.berserkdle.entities.AbstractEntity;
 import org.example.berserkdle.repositories.AbstractRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;

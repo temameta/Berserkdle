@@ -120,6 +120,32 @@ input {
         background-color: var(--background-color-items);
         padding: 2%;
     }
+    .guessed {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .guess-row {
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .attribute-container {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 5px;
+        margin-bottom: 5px;
+    }
+
+    .table-header {
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+        font-weight: bold;
+        text-align: center;
+    }
 }
 
 @media (max-width: 1600px) {

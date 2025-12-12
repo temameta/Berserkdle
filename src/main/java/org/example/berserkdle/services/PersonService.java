@@ -3,7 +3,10 @@ package org.example.berserkdle.services;
 import org.example.berserkdle.dtos.PersonDTO;
 import org.example.berserkdle.entities.*;
 import org.example.berserkdle.repositories.*;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -40,10 +43,18 @@ public class PersonService extends AbstractService<PersonDTO, PersonEntity, Pers
         return personEntity;
     }
     @Override
+    @CacheEvict(cacheNames = {"persons", "personNames"}, allEntries = true)
     public void save(PersonDTO DTO) {
         PersonEntity personEntity = toEntity(DTO);
         repository.save(personEntity);
         createPersonAssociations(DTO, personEntity);
+    }
+
+    @Override
+    @Transactional
+    @CacheEvict(cacheNames = {"persons", "personNames"}, allEntries = true)
+    public void delete(PersonDTO DTO) {
+        repository.deleteByName(DTO.getName());
     }
 
     private void createPersonAssociations(PersonDTO personDTO, PersonEntity personEntity) {
@@ -89,7 +100,15 @@ public class PersonService extends AbstractService<PersonDTO, PersonEntity, Pers
         return personDTO;
     }
 
+    @Cacheable(value = "personNames", key = "'all'")
     public List<String> getAllNames() {
         return repository.getAllNames();
+    }
+
+    @Cacheable(value = "persons", key = "'all'")
+    @Transactional(readOnly = true)
+    @Override
+    public List<PersonDTO> findAll() {
+        return toDTO(repository.findAll());
     }
 }
