@@ -5,11 +5,8 @@
 <main class="main">
     <h1>Berserkdle</h1>
 
-    <!-- Отладочная информация -->
-    <div class="debug-info" th:if="${guessedPersons != null}">
-        Всего догадок: <span th:text="${guessedPersons.size()}">0</span><br>
-        Первая догадка: <span th:if="${guessedPersons.size() > 0}" th:text="${guessedPersons[0]?.requestedPersonDto?.name}">нет</span><br>
-
+    <div>
+        <a href="/users/profile"><button class="border">Профиль</button></a>
     </div>
 
     <p>Угадай персонажа</p>

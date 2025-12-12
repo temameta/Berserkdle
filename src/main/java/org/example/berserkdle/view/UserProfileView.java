@@ -5,18 +5,56 @@ public class UserProfileView {
 
     private String email;
 
-    private String fullName;
+    private int gamesWon;
 
-    private int age;
+    private int totalAttempts;
+
+    private int totalGamesPlayed;
+
+    private double winRate;
 
     public UserProfileView() {
     }
 
-    public UserProfileView(String username, String email, String fullName, int age) {
+    public double getWinRate() {
+        return winRate;
+    }
+
+    public void setWinRate(double winRate) {
+        this.winRate = winRate;
+    }
+
+    public UserProfileView(String username, String email, int gamesWon, int totalAttempts, int totalGamesPlayed, double winRate) {
         this.username = username;
         this.email = email;
-        this.fullName = fullName;
-        this.age = age;
+        this.gamesWon = gamesWon;
+        this.totalAttempts = totalAttempts;
+        this.totalGamesPlayed = totalGamesPlayed;
+        this.winRate = winRate;
+    }
+
+    public int getGamesWon() {
+        return gamesWon;
+    }
+
+    public void setGamesWon(int gamesWon) {
+        this.gamesWon = gamesWon;
+    }
+
+    public int getTotalAttempts() {
+        return totalAttempts;
+    }
+
+    public void setTotalAttempts(int totalAttempts) {
+        this.totalAttempts = totalAttempts;
+    }
+
+    public int getTotalGamesPlayed() {
+        return totalGamesPlayed;
+    }
+
+    public void setTotalGamesPlayed(int totalGamesPlayed) {
+        this.totalGamesPlayed = totalGamesPlayed;
     }
 
     public String getUsername() {
@@ -34,21 +72,4 @@ public class UserProfileView {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
 }

@@ -19,16 +19,10 @@ public class PlayerStatistic {
     private int totalAttempts = 0;
     private int totalGamesPlayed = 0;
 
-    private int sumAttemptsForWonGames = 0;
-
-    @Column(name = "last_played")
-    private LocalDateTime lastPlayed;
-
     public PlayerStatistic() {}
 
     public PlayerStatistic(User user) {
         this.user = user;
-        this.lastPlayed = LocalDateTime.now();
     }
 
     public void addGameResult(boolean won, int attempts) {
@@ -37,15 +31,7 @@ public class PlayerStatistic {
 
         if (won) {
             this.gamesWon++;
-            this.sumAttemptsForWonGames += attempts;
         }
-
-        this.lastPlayed = LocalDateTime.now();
-    }
-
-    public double getAverageAttemptsToWin() {
-        if (gamesWon == 0) return 0;
-        return (double) sumAttemptsForWonGames / gamesWon;
     }
 
     public Long getId() { return id; }
@@ -62,10 +48,4 @@ public class PlayerStatistic {
 
     public int getTotalGamesPlayed() { return totalGamesPlayed; }
     public void setTotalGamesPlayed(int totalGamesPlayed) { this.totalGamesPlayed = totalGamesPlayed; }
-
-    public LocalDateTime getLastPlayed() { return lastPlayed; }
-    public void setLastPlayed(LocalDateTime lastPlayed) { this.lastPlayed = lastPlayed; }
-
-    public int getSumAttemptsForWonGames() { return sumAttemptsForWonGames; }
-    public void setSumAttemptsForWonGames(int sumAttemptsForWonGames) { this.sumAttemptsForWonGames = sumAttemptsForWonGames; }
 }

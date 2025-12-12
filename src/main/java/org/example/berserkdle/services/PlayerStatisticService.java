@@ -58,7 +58,6 @@ public class PlayerStatisticService {
                 .orElseGet(() -> new PlayerStatistic(user));
 
         stats.setTotalAttempts(stats.getTotalAttempts() + 1);
-        stats.setLastPlayed(LocalDateTime.now());
         statisticRepository.save(stats);
     }
 }

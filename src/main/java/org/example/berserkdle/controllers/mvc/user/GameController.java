@@ -52,9 +52,8 @@ public class GameController {
             // Загадываем случайного персонажа
             session.setAttribute(SECRET_PERSON_KEY, gameService.getHiddenPerson());
             session.setAttribute(GUESSED_PERSONS_KEY, new ArrayList<ResultDto>());
-            model.addAttribute("gameWon", false);
         }
-
+        model.addAttribute("gameWon", false);
         model.addAttribute("requestedPerson", new RequestedPersonDto());
         model.addAttribute("allPersonsNames", personService.getAllNames());
 

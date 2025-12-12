@@ -3,10 +3,13 @@ package org.example.berserkdle.controllers.mvc;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.example.berserkdle.dtos.UserRegistrationDto;
+import org.example.berserkdle.entities.PlayerStatistic;
 import org.example.berserkdle.entities.User;
 import org.example.berserkdle.enums.UserRoles;
 import org.example.berserkdle.services.AuthService;
+import org.example.berserkdle.services.PlayerStatisticService;
 import org.example.berserkdle.view.UserProfileView;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
@@ -24,11 +27,13 @@ import java.security.Principal;
 @Controller
 @RequestMapping("/users")
 public class AuthController {
-
+    private final PlayerStatisticService statisticService;
     private final AuthService authService;
 
-    public AuthController(AuthService authService) {
+    @Autowired
+    public AuthController(AuthService authService, PlayerStatisticService statisticService) {
         this.authService = authService;
+        this.statisticService = statisticService;
         log.info("AuthController инициализирован");
     }
 
@@ -94,14 +99,21 @@ public class AuthController {
     public String profile(Principal principal, Model model) {
         String username = principal.getName();
         log.debug("Отображение профиля пользователя: {}", username);
+        PlayerStatistic stats = statisticService.getStatistics(username);
+
+        model.addAttribute("winRate",
+                stats.getTotalGamesPlayed() > 0 ?
+                        (double) stats.getGamesWon() / stats.getTotalGamesPlayed() * 100 : 0);
 
         User user = authService.getUser(username);
 
         UserProfileView userProfileView = new UserProfileView(
                 username,
                 user.getEmail(),
-                user.getFullName(),
-                user.getAge()
+                stats.getGamesWon(),
+                stats.getTotalAttempts(),
+                stats.getTotalGamesPlayed(),
+                stats.getTotalGamesPlayed() > 0 ? (double) stats.getGamesWon() / stats.getTotalGamesPlayed() * 100 : 0
         );
 
         model.addAttribute("user", userProfileView);

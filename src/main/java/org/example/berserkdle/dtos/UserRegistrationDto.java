@@ -6,21 +6,13 @@ import org.example.berserkdle.utils.validation.UniqueUsername;
 
 
 public class UserRegistrationDto {
-
     @UniqueUsername
     private String username;
-
-    private String fullname;
 
     @UniqueEmail
     private String email;
 
-
-    private int age;
-
-
     private String password;
-
 
     private String confirmPassword;
 
@@ -35,15 +27,7 @@ public class UserRegistrationDto {
     public void setUsername(String username) {
         this.username = username;
     }
-    @NotEmpty(message = "Полное имя не должно быть пустым!")
-    @Size(min = 5, max = 20, message = "Полное имя должно быть от 5 до 20 символов!")
-    public String getFullname() {
-        return fullname;
-    }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
     @NotEmpty(message = "Email не должен быть пустым!")
     @Email(message = "Введите корректный email!")
     public String getEmail() {
@@ -52,15 +36,6 @@ public class UserRegistrationDto {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-    @Min(value = 0, message = "Возраст не может быть меньше 0!")
-    @Max(value = 90, message = "Возраст не может быть больше 90!")
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
     @NotEmpty(message = "Пароль не должен быть пустым!")
     @Size(min = 5, max = 20, message = "Пароль должен быть от 5 до 20 символов!")
@@ -85,9 +60,7 @@ public class UserRegistrationDto {
     public String toString() {
         return "UserRegistrationDTO{" +
                 "username='" + username + '\'' +
-                ", fullName='" + fullname + '\'' +
                 ", email='" + email + '\'' +
-                ", age=" + age +
                 ", password='" + password + '\'' +
                 ", confirmPassword='" + confirmPassword + '\'' +
                 '}';

@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="~{fragments/head}"/>
+<head th:replace="~{fragments/user-head}"/>
 <body>
-<nav th:replace="~{fragments/navbar2}"></nav>
 <main class="container">
   <hgroup>
     <h1>Профиль пользователя</h1>
@@ -11,20 +10,45 @@
   <article class="card">
     <div class="grid">
       <div th:object="${user}">
-        <h2 th:text="*{fullName}"></h2>
+        <h2 th:text="*{username}"></h2>
         <p><strong>Логин:</strong> <span th:text="*{username}"></span></p>
         <p><strong>Email:</strong> <span th:text="*{email}"></span></p>
-        <p><strong>Возраст:</strong> <span th:text="*{age}"></span></p>
         <div>
           <strong>Роли:</strong>
           <div sec:authentication="principal.authorities" style="margin-top: 0.5rem;"></div>
+
+          <br>
+
+          <h1>Статистика Игрока</h1>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-label">Всего сыграно игр</div>
+              <div class="stat-value" th:text="*{totalGamesPlayed}">0</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-label">Побед</div>
+              <div class="stat-value" th:text="*{gamesWon}">0</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-label">Всего попыток</div>
+              <div class="stat-value" th:text="*{totalAttempts}">0</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-label">Процент побед</div>
+              <div class="stat-value" th:text="${#numbers.formatDecimal(winRate, 1, 1)}">0</div>
+              <div class="stat-label">%</div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="text-center">
-        <img src="/pic/employee.png" alt="Профиль пользователя" style="width: 100%; max-width: 300px;">
-      </div>
     </div>
+    <a th:href="@{/}"><button class="border">Вернуться к игре</button></a>
   </article>
+
 </main>
 </body>
 </html>
