@@ -29,7 +29,6 @@ public class GameController {
     private final GameService gameService;
     private PlayerStatisticService statisticService;
 
-    // Ключ для хранения загаданного персонажа в сессии
     private static final String SECRET_PERSON_KEY = "secretPerson";
     private static final String GUESSED_PERSONS_KEY = "guessedPersons1";
 
@@ -107,7 +106,7 @@ public class GameController {
         return "redirect:/";
     }
 
-    @PostMapping("/new-game")
+    @GetMapping("/new-game")
     public String newGame(HttpSession session) {
         session.removeAttribute(SECRET_PERSON_KEY);
         session.removeAttribute(GUESSED_PERSONS_KEY);

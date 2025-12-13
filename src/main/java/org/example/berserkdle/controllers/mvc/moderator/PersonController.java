@@ -3,7 +3,8 @@ package org.example.berserkdle.controllers.mvc.moderator;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.example.berserkdle.dtos.PersonDTO;
-import org.example.berserkdle.services.PersonService;
+import org.example.berserkdle.repositories.ArcRepository;
+import org.example.berserkdle.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,11 +21,21 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/moderator/person")
 public class PersonController {
     private final PersonService personService;
+    private final WeaponService weaponService;
+    private final ArcService arcService;
+    private final SpeciesService speciesService;
+    private final GenderService genderService;
+    private final GroupService groupService;
 
     @Autowired
-    public PersonController(PersonService personService) {
+    public PersonController(PersonService personService, WeaponService weaponService, ArcService arcService, SpeciesService speciesService, GenderService genderService, GroupService groupService) {
         log.info("Инициализация контроллера PersonController");
         this.personService = personService;
+        this.weaponService = weaponService;
+        this.arcService = arcService;
+        this.speciesService = speciesService;
+        this.genderService = genderService;
+        this.groupService = groupService;
     }
 
     @ModelAttribute("personModel")
@@ -67,8 +78,13 @@ public class PersonController {
     }
 
     @GetMapping("/create")
-    public String create() {
+    public String create(Model model) {
         log.info("Открыта страница создания новой персонажа");
+        model.addAttribute("weaponList", weaponService.getAllNames());
+        model.addAttribute("groupList", groupService.getAllNames());
+        model.addAttribute("arcList", arcService.getAllNames());
+        //model.addAttribute("speciesList", speciesService.getAllNames());
+        model.addAttribute("genderList", genderService.getAllNames());
         return "person/create";
     }
 

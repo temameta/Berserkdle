@@ -3,7 +3,10 @@ package org.example.berserkdle.services;
 import org.example.berserkdle.dtos.ArcDTO;
 import org.example.berserkdle.entities.ArcEntity;
 import org.example.berserkdle.repositories.ArcRepository;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ArcService extends AbstractService<ArcDTO, ArcEntity, ArcRepository> {
@@ -24,5 +27,10 @@ public class ArcService extends AbstractService<ArcDTO, ArcEntity, ArcRepository
         return ArcEntity.builder()
                 .name(arcDTO.getName())
                 .build();
+    }
+
+    @Cacheable(value = "arcNames", key = "'all'")
+    public List<String> getAllNames() {
+        return repository.getAllNames();
     }
 }

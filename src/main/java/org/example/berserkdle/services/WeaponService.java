@@ -3,7 +3,10 @@ package org.example.berserkdle.services;
 import org.example.berserkdle.dtos.WeaponDTO;
 import org.example.berserkdle.entities.WeaponEntity;
 import org.example.berserkdle.repositories.WeaponRepository;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class WeaponService extends AbstractService<WeaponDTO, WeaponEntity, WeaponRepository> {
@@ -24,5 +27,10 @@ public class WeaponService extends AbstractService<WeaponDTO, WeaponEntity, Weap
         return WeaponEntity.builder()
                 .name(weaponDTO.getName())
                 .build();
+    }
+
+    @Cacheable(value = "weaponNames", key = "'all'")
+    public List<String> getAllNames() {
+        return repository.getAllNames();
     }
 }
