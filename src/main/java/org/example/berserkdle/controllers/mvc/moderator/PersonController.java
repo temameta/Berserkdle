@@ -3,7 +3,6 @@ package org.example.berserkdle.controllers.mvc.moderator;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.example.berserkdle.dtos.PersonDTO;
-import org.example.berserkdle.repositories.ArcRepository;
 import org.example.berserkdle.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,21 +20,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/moderator/person")
 public class PersonController {
     private final PersonService personService;
-    private final WeaponService weaponService;
-    private final ArcService arcService;
-    private final SpeciesService speciesService;
-    private final GenderService genderService;
-    private final GroupService groupService;
 
     @Autowired
-    public PersonController(PersonService personService, WeaponService weaponService, ArcService arcService, SpeciesService speciesService, GenderService genderService, GroupService groupService) {
+    public PersonController(PersonService personService) {
         log.info("Инициализация контроллера PersonController");
         this.personService = personService;
-        this.weaponService = weaponService;
-        this.arcService = arcService;
-        this.speciesService = speciesService;
-        this.genderService = genderService;
-        this.groupService = groupService;
     }
 
     @ModelAttribute("personModel")
@@ -51,13 +40,13 @@ public class PersonController {
             @RequestParam(required = false) String search,
             Model model
     ) {
-        log.info("Открыта страница всех полов");
+        log.info("Открыта страница всех персонажей");
         if (search != null && !search.trim().isEmpty()) {
             log.info("Поиск персонажа");
             model.addAttribute("persons", personService.findByName(search));
             model.addAttribute("search", search);
         } else {
-            log.info("Вывод всех полов");
+            log.info("Вывод всех персонажей");
             Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).ascending());
             Page<PersonDTO> personPage = personService.allPaginated(pageable);
 
@@ -80,11 +69,7 @@ public class PersonController {
     @GetMapping("/create")
     public String create(Model model) {
         log.info("Открыта страница создания новой персонажа");
-        model.addAttribute("weaponList", weaponService.getAllNames());
-        model.addAttribute("groupList", groupService.getAllNames());
-        model.addAttribute("arcList", arcService.getAllNames());
-        //model.addAttribute("speciesList", speciesService.getAllNames());
-        model.addAttribute("genderList", genderService.getAllNames());
+
         return "person/create";
     }
 
@@ -100,7 +85,7 @@ public class PersonController {
             return "redirect:/moderator/person/create";
         }
         log.info("Создание новой персонажа {}...", personModel.getName());
-        personService.save(personModel);
+        personService.createNew(personModel);
         log.info("Пол успешно {} добавлен!", personModel.getName());
         redirectAttributes.addFlashAttribute("successMessage", "Пол " + personModel.getName() + " успешно добавлен!");
         return "redirect:/moderator/person/create";
@@ -124,7 +109,7 @@ public class PersonController {
             return "redirect:/moderator/person/{name}/update";
         }
         log.info("Обновление персонажа {}...", name);
-        personService.update(name, personModel.getName());
+        //personService.update(name, personModel.getName());
         log.info("Пол {} успешно добавлен! Новое название: {}", name, personModel.getName());
         redirectAttributes.addFlashAttribute("successMessage", "Пол " + personModel.getName() + " успешно добавлен!");
         return "redirect:/moderator/person/all";
@@ -140,7 +125,7 @@ public class PersonController {
     @PostMapping("/{name}/delete")
     public String delete(PersonDTO person, RedirectAttributes redirectAttributes, @PathVariable String name) {
         log.info("Запрос на удаление персонажа {}", name);
-        personService.delete(person);
+        personService.delete(person.getName());
         log.info("Пол {} успешно добавлен!", name);
         redirectAttributes.addFlashAttribute("successMessage", "Пол " + person.getName() + " успешно добавлен!");
         return "redirect:/moderator/person/all";

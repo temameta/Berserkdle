@@ -1,4 +1,4 @@
-package org.example.berserkdle.dtos;
+package org.example.berserkdle.dtos.deprecated;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -70,7 +70,9 @@ public class GameController {
                 // Если персонаж угадан
 
                 int attempts = ((List<?>) session.getAttribute(GUESSED_PERSONS_KEY)).size(); // Получаем количество попыток в этой игре
-                statisticService.updateOnWin(userDetails.getUsername(), attempts);
+                if (userDetails != null) {
+                    statisticService.updateOnWin(userDetails.getUsername(), attempts);
+                }
 
             }
         }
@@ -101,7 +103,10 @@ public class GameController {
         guessedPersons.add(result);
         session.setAttribute(GUESSED_PERSONS_KEY, guessedPersons);
 
-        statisticService.addAttempt(userDetails.getUsername());
+        if (userDetails != null) {
+            statisticService.addAttempt(userDetails.getUsername());
+        }
+
 
         return "redirect:/";
     }

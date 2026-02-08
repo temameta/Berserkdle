@@ -1,20 +1,23 @@
 package org.example.berserkdle.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
 
-@MappedSuperclass
-@Data
+import java.io.Serializable;
+
+@Entity
+@Table(name = "weapons")
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
-public abstract class AbstractEntity {
+@Getter
+public class Weapon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true, nullable = false)
-    private String name;
+    String name;
+
+    public Weapon(String name) {
+        this.name = name;
+    }
 }

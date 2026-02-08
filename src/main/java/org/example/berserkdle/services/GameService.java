@@ -21,12 +21,12 @@ public class GameService {
 
     public GameService(PersonService personService) {
         this.personService = personService;
-        initHiddenPerson();
+        //initHiddenPerson();
     }
 
-    public void initHiddenPerson() {
-        this.hiddenPerson = personService.findByName("Гатс");
-    }
+//    public void initHiddenPerson() {
+//        this.hiddenPerson = personService.findByName("Гатс");
+//    }
 
     public PersonDTO getHiddenPerson() {
         return hiddenPerson;

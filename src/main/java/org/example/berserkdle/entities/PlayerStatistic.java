@@ -1,12 +1,16 @@
 package org.example.berserkdle.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "player_statistics")
 public class PlayerStatistic {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,18 +38,4 @@ public class PlayerStatistic {
         }
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
-
-    public int getGamesWon() { return gamesWon; }
-    public void setGamesWon(int gamesWon) { this.gamesWon = gamesWon; }
-
-    public int getTotalAttempts() { return totalAttempts; }
-    public void setTotalAttempts(int totalAttempts) { this.totalAttempts = totalAttempts; }
-
-    public int getTotalGamesPlayed() { return totalGamesPlayed; }
-    public void setTotalGamesPlayed(int totalGamesPlayed) { this.totalGamesPlayed = totalGamesPlayed; }
 }

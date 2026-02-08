@@ -9,13 +9,13 @@ import org.example.berserkdle.utils.validation.UniqueName;
 import java.util.ArrayList;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-public class PersonDTO extends AbstractDTO {
+public class PersonDTO {
+    private String name;
     @NotEmpty(message = "Арка первого появления должна быть заполнена!")
     private String firstArc;
     @NotEmpty(message = "Пол должен быть заполнен!")
@@ -27,21 +27,10 @@ public class PersonDTO extends AbstractDTO {
     @NotEmpty(message = "Оружия не могут быть пустыми!")
     private List<String> weapons = new ArrayList<>();
 
-    @Override
     @UniqueName(entityClass = PersonDTO.class, message = "Такой персонаж уже существует!")
     @NotEmpty(message = "Имя персонажа не может быть пустым!")
-    @Size(min = 2, max = 64, message = "Имя персонажа должно быть больше 2 и меньше 64 символов!")
+    @Size(min = 2, max = 64, message = "Имя персонажа должно быть от 2 до 64 символов!")
     public String getName() {
-        return super.getName();
-    }
-
-    public void addGroup(String groupName) {
-        if (!this.groups.contains(groupName))
-            this.groups.add(groupName);
-    }
-
-    public void addWeapon(String weaponName) {
-        if (!this.weapons.contains(weaponName))
-            this.weapons.add(weaponName);
+        return this.name;
     }
 }

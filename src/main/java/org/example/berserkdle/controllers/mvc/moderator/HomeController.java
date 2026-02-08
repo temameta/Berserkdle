@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/moderator")
 public class HomeController {
-    private GameService gameService;
+    private final GameService gameService;
 
     @Autowired
     public HomeController(GameService gameService) {

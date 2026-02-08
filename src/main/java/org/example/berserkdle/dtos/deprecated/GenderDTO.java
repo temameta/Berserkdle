@@ -1,4 +1,4 @@
-package org.example.berserkdle.dtos;
+package org.example.berserkdle.dtos.deprecated;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -11,10 +11,10 @@ import org.example.berserkdle.utils.validation.UniqueName;
 @ToString(callSuper = true)
 @AllArgsConstructor
 @SuperBuilder
-public class GroupDTO extends AbstractDTO {
+public class GenderDTO extends AbstractDTO {
     @Override
-    @UniqueName(entityClass = GroupDTO.class, message = "Такая группа уже существует!")
-    @NotEmpty(message = "Название группы не может быть пустым!")
+    @UniqueName(entityClass = GenderDTO.class, message = "Такой пол уже существует!")
+    @NotEmpty(message = "Название пола не может быть пустым!")
     @Size(min = 2, max = 32, message = "Название пола должно быть больше 2 и меньше 32 символов!")
     public String getName() {
         return super.getName();

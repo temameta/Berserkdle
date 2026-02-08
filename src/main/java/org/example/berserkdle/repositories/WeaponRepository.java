@@ -1,6 +1,6 @@
 package org.example.berserkdle.repositories;
 
-import org.example.berserkdle.entities.WeaponEntity;
+import org.example.berserkdle.entities.Weapon;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface WeaponRepository extends AbstractRepository<WeaponEntity> {
-    @Query("SELECT name FROM WeaponEntity ")
+public interface WeaponRepository extends JpaRepository<Weapon, Integer> {
+    Weapon findByName(String name);
+    @Query("SELECT name FROM Weapon")
     List<String> getAllNames();
 }

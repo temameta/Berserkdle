@@ -1,114 +1,90 @@
 package org.example.berserkdle.services;
 
+import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.example.berserkdle.dtos.PersonDTO;
 import org.example.berserkdle.entities.*;
 import org.example.berserkdle.repositories.*;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+@Slf4j
 @Service
-public class PersonService extends AbstractService<PersonDTO, PersonEntity, PersonRepository>{
-    private final PersonWithGroupRepository personWithGroupRepository;
+public class PersonService {
+    private final PersonRepository personRepository;
     private final GroupRepository groupRepository;
-    private final PersonWithWeaponRepository personWithWeaponRepository;
     private final WeaponRepository weaponRepository;
-    private final SpeciesRepository speciesRepository;
-    private final GenderRepository genderRepository;
-    private final ArcRepository arcRepository;
+    private final ModelMapper mapper;
 
-    public PersonService(PersonRepository repository, PersonWithGroupRepository personWithGroupRepository, GroupRepository groupRepository, PersonWithWeaponRepository personWithWeaponRepository, WeaponRepository weaponRepository, SpeciesRepository speciesRepository, GenderRepository genderRepository, ArcRepository arcRepository) {
-        super(repository);
-        this.personWithGroupRepository = personWithGroupRepository;
+    @Autowired
+    public PersonService(PersonRepository repository, GroupRepository groupRepository, WeaponRepository weaponRepository, ModelMapper mapper) {
+        this.personRepository = repository;
         this.groupRepository = groupRepository;
-        this.personWithWeaponRepository = personWithWeaponRepository;
         this.weaponRepository = weaponRepository;
-        this.speciesRepository = speciesRepository;
-        this.genderRepository = genderRepository;
-        this.arcRepository = arcRepository;
+        this.mapper = mapper;
     }
 
-    @Override
-    public PersonEntity toEntity(PersonDTO personDTO) {
-        PersonEntity personEntity = new PersonEntity();
-
-        personEntity.setName(personDTO.getName());
-        personEntity.setSpecies(speciesRepository.findByName(personDTO.getSpecies()));
-        personEntity.setGender(genderRepository.findByName(personDTO.getGender()));
-        personEntity.setFirstArc(arcRepository.findByName(personDTO.getFirstArc()));
-        
-        return personEntity;
-    }
-    @Override
-    @CacheEvict(cacheNames = {"persons", "personNames"}, allEntries = true)
-    public void save(PersonDTO DTO) {
-        PersonEntity personEntity = toEntity(DTO);
-        repository.save(personEntity);
-        createPersonAssociations(DTO, personEntity);
-    }
-
-    @Override
     @Transactional
     @CacheEvict(cacheNames = {"persons", "personNames"}, allEntries = true)
-    public void delete(PersonDTO DTO) {
-        repository.deleteByName(DTO.getName());
+    public void delete(String name) {
+        personRepository.deleteByName(name);
     }
 
-    private void createPersonAssociations(PersonDTO personDTO, PersonEntity personEntity) {
-        for (String weaponName : personDTO.getWeapons()) {
-            WeaponEntity weaponEntity = weaponRepository.findByName(weaponName);
-            if (weaponEntity != null) {
-                PersonWithWeaponEntity personWithWeapon = new PersonWithWeaponEntity(
-                        new PersonWithWeaponId(personEntity.getId(), weaponEntity.getId()),
-                        personEntity,
-                        weaponEntity
-                );
-                personWithWeaponRepository.save(personWithWeapon);
-            }
+    public void createNew(PersonDTO dto) {
+        List<Weapon> weapons = new ArrayList<>();
+        List<Group> groups = new ArrayList<>();
+        for (String name : dto.getWeapons()) {
+            weapons.add(new Weapon(name));
         }
-
-        // Создаем связи с группами
-        for (String groupName : personDTO.getGroups()) {
-            GroupEntity groupEntity = groupRepository.findByName(groupName);
-            if (groupEntity != null) {
-                PersonWithGroupEntity personWithGroup = new PersonWithGroupEntity(
-                        new PersonWithGroupId(personEntity.getId(), groupEntity.getId()),
-                        personEntity,
-                        groupEntity
-                );
-                personWithGroupRepository.save(personWithGroup);
-            }
+        for (String name : dto.getGroups()) {
+            groups.add(new Group(name));
         }
+        Person person = new Person(
+                dto.getName(),
+                dto.getGender(),
+                dto.getFirstArc(),
+                dto.getSpecies(),
+                groups,
+                weapons
+        );
+        personRepository.save(person);
     }
 
-    @Override
-    public PersonDTO toDTO(PersonEntity personEntity) {
-        PersonDTO personDTO = new PersonDTO();
-        personDTO.setName(personEntity.getName());
-        personDTO.setGender(personEntity.getGender().getName());
-        personDTO.setFirstArc(personEntity.getFirstArc().getName());
-        personDTO.setSpecies(personEntity.getSpecies().getName());
-        for (PersonWithGroupEntity personWithGroupEntity : personWithGroupRepository.findAllByPerson_Id(personEntity.getId())) {
-            personDTO.addGroup(groupRepository.findById(personWithGroupEntity.getGroup().getId()).get().getName());
-        }
-        for (PersonWithWeaponEntity personWithWeaponEntity : personWithWeaponRepository.findAllByPerson_Id(personEntity.getId())) {
-            personDTO.addWeapon(weaponRepository.findById(personWithWeaponEntity.getWeapon().getId()).get().getName());
-        }
-        return personDTO;
+    public PersonDTO findByName(String name) {
+        Person person = personRepository.findByName(name);
+        return PersonDTO.builder()
+                .name(person.getName())
+                .gender(person.getGender())
+                .species(person.getSpecies())
+                .firstArc(person.getArc())
+                .groups(person.getGroups().stream().map(Group::getName).collect(Collectors.toList()))
+                .weapons(person.getWeapons().stream().map(Weapon::getName).collect(Collectors.toList()))
+                .build();
+    }
+
+    public boolean existsByName(String name) {
+        return personRepository.existsByName(name);
+    }
+
+    public Page<PersonDTO> allPaginated(Pageable pageable) {
+        log.debug("Получение компаний с пагинацией: страница {}, размер {}",
+                pageable.getPageNumber(), pageable.getPageSize());
+        return personRepository.findAll(pageable)
+                .map(person -> mapper.map(person, PersonDTO.class));
     }
 
     @Cacheable(value = "personNames", key = "'all'")
     public List<String> getAllNames() {
-        return repository.getAllNames();
-    }
-
-    @Cacheable(value = "persons", key = "'all'")
-    @Transactional(readOnly = true)
-    @Override
-    public List<PersonDTO> findAll() {
-        return toDTO(repository.findAll());
+        return personRepository.getAllNames();
     }
 }
