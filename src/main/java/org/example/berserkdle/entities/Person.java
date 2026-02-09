@@ -17,15 +17,16 @@ public class Person extends AuditableEntity implements Serializable {
     private Long id;
     @Column(unique = true, nullable = false)
     private String name;
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String gender;
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String arc;
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String species;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn
     private List<Group> groups;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Weapon> weapons;
 
     public Person(String name, String gender, String arc, String species, List<Group> groups, List<Weapon> weapons) {

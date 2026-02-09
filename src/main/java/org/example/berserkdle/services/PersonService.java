@@ -47,7 +47,13 @@ public class PersonService {
             weapons.add(new Weapon(name));
         }
         for (String name : dto.getGroups()) {
-            groups.add(new Group(name));
+            Group group = groupRepository.findByName(name);
+            System.out.println(group);
+            if (group == null) {
+                group = new Group(name);
+                groupRepository.save(group);
+            }
+            groups.add(group);
         }
         Person person = new Person(
                 dto.getName(),

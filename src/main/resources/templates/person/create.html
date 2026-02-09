@@ -24,11 +24,10 @@
         <!-- Пол -->
         <div class="label-container">
             <label class="form-label">Пол:</label>
-            <input type="text" class="form-control autocomplete-input"
-                   id="genderInput"
-                   placeholder="Введите пол"
-                   data-search-url="/api/gender/search">
-            <input type="hidden" id="gender" th:field="*{gender}">
+            <input type="text" class="form-control"
+                   id="gender"
+                   th:field="*{gender}"
+                   placeholder="Введите пол">
             <div class="autocomplete-items" id="genderAutocompleteList"></div>
             <div th:if="${#fields.hasErrors('gender')}" class="text-danger">
                 <small th:errors="*{gender}"></small>
@@ -38,12 +37,10 @@
         <!-- Арка -->
         <div class="label-container">
             <label class="form-label">Арка:</label>
-            <input type="text" class="form-control autocomplete-input"
-                   id="firstArcInput"
-                   placeholder="Введите название арки"
-                   data-search-url="/api/arc/search">
-            <input type="hidden" id="firstArc" th:field="*{firstArc}">
-            <div class="autocomplete-items" id="firstArcAutocompleteList"></div>
+            <input type="text" class="form-control"
+                   id="firstArc"
+                   th:field="*{firstArc}"
+                   placeholder="Введите название арки">
             <div th:if="${#fields.hasErrors('firstArc')}" class="text-danger">
                 <small th:errors="*{firstArc}"></small>
             </div>
@@ -53,11 +50,9 @@
         <div class="label-container">
             <label class="form-label">Раса:</label>
             <input type="text" class="form-control autocomplete-input"
-                   id="speciesInput"
-                   placeholder="Введите расу"
-                   data-search-url="/api/species/search">
-            <input type="hidden" id="species" th:field="*{species}">
-            <div class="autocomplete-items" id="speciesAutocompleteList"></div>
+                   id="species"
+                   th:field="*{species}"
+                   placeholder="Введите расу">
             <div th:if="${#fields.hasErrors('species')}" class="text-danger">
                 <small th:errors="*{species}"></small>
             </div>
@@ -68,20 +63,10 @@
             <label class="form-label">Оружие:</label>
             <div class="input-group">
                 <input type="text" class="form-control autocomplete-input"
-                       id="weaponInput"
-                       placeholder="Введите название оружия"
-                       data-search-url="/api/weapon/search">
-                <button class="btn btn-outline-secondary" type="button"
-                        onclick="addWeapon()">Добавить</button>
+                       id="weapon"
+                       th:field="*{weapons}"
+                       placeholder="Введите название оружия">
             </div>
-            <div class="autocomplete-items" id="weaponAutocompleteList"></div>
-            <div class="selected-items" id="weaponsList">
-                <!-- Выбранное оружие будет отображаться здесь -->
-            </div>
-            <div th:if="${#fields.hasErrors('weapons')}" class="text-danger">
-                <small th:errors="*{weapons}"></small>
-            </div>
-            <input type="hidden" id="weapons" th:field="*{weapons}">
         </div>
 
         <!-- Группы -->
@@ -89,174 +74,13 @@
             <label class="form-label">Группы:</label>
             <div class="input-group">
                 <input type="text" class="form-control autocomplete-input"
-                       id="groupInput"
-                       placeholder="Введите название группы"
-                       data-search-url="/api/group/search">
-                <button class="btn btn-outline-secondary" type="button"
-                        onclick="addGroup()">Добавить</button>
+                       id="group"
+                       th:field="*{groups}"
+                       placeholder="Введите название группы">
             </div>
-            <div class="autocomplete-items" id="groupAutocompleteList"></div>
-            <div class="selected-items" id="groupsList">
-                <!-- Выбранные группы будут отображаться здесь -->
-            </div>
-            <div th:if="${#fields.hasErrors('groups')}" class="text-danger">
-                <small th:errors="*{groups}"></small>
-            </div>
-            <input type="hidden" id="groups" th:field="*{groups}">
         </div>
-
         <button type="submit" class="btn btn-primary">Создать</button>
     </form>
 </main>
-
-<script>
-    // Глобальные переменные для хранения выбранных значений
-    let selectedWeapons = [];
-    let selectedGroups = [];
-
-    // Автодополнение
-    document.addEventListener('DOMContentLoaded', function() {
-        initAutocomplete('genderInput', 'gender', 'genderAutocompleteList');
-        initAutocomplete('firstArcInput', 'firstArc', 'firstArcAutocompleteList');
-        initAutocomplete('speciesInput', 'species', 'speciesAutocompleteList');
-        initAutocomplete('weaponInput', null, 'weaponAutocompleteList');
-        initAutocomplete('groupInput', null, 'groupAutocompleteList');
-    });
-
-    function initAutocomplete(inputId, hiddenInputId, listId) {
-        const input = document.getElementById(inputId);
-        const autocompleteList = document.getElementById(listId);
-
-        input.addEventListener('input', function() {
-            const query = this.value;
-            if (query.length < 1) {
-                autocompleteList.innerHTML = '';
-                return;
-            }
-
-            const searchUrl = this.getAttribute('data-search-url');
-
-            fetch(`${searchUrl}?query=${encodeURIComponent(query)}`)
-                .then(response => response.json())
-                .then(data => {
-                    autocompleteList.innerHTML = '';
-                    data.forEach(item => {
-                        const div = document.createElement('div');
-                        div.textContent = item;
-                        div.addEventListener('click', function() {
-                            input.value = item;
-                            if (hiddenInputId) {
-                                document.getElementById(hiddenInputId).value = item;
-                            }
-                            autocompleteList.innerHTML = '';
-                        });
-                        autocompleteList.appendChild(div);
-                    });
-                });
-        });
-
-        // Закрытие автодополнения при клике вне поля
-        document.addEventListener('click', function(e) {
-            if (e.target !== input) {
-                autocompleteList.innerHTML = '';
-            }
-        });
-    }
-
-    // Функции для добавления оружия и групп
-    function addWeapon() {
-        const input = document.getElementById('weaponInput');
-        const weaponName = input.value.trim();
-
-        if (weaponName && !selectedWeapons.includes(weaponName)) {
-            selectedWeapons.push(weaponName);
-            updateWeaponsList();
-            updateWeaponsHiddenInput();
-            input.value = '';
-        }
-    }
-
-    function addGroup() {
-        const input = document.getElementById('groupInput');
-        const groupName = input.value.trim();
-
-        if (groupName && !selectedGroups.includes(groupName)) {
-            selectedGroups.push(groupName);
-            updateGroupsList();
-            updateGroupsHiddenInput();
-            input.value = '';
-        }
-    }
-
-    function updateWeaponsList() {
-        const container = document.getElementById('weaponsList');
-        container.innerHTML = '';
-
-        selectedWeapons.forEach((weapon, index) => {
-            const item = document.createElement('div');
-            item.className = 'selected-item';
-            item.innerHTML = `
-                ${weapon}
-                <button type="button" class="remove-btn" onclick="removeWeapon(${index})">
-                    ×
-                </button>
-            `;
-            container.appendChild(item);
-        });
-    }
-
-    function updateGroupsList() {
-        const container = document.getElementById('groupsList');
-        container.innerHTML = '';
-
-        selectedGroups.forEach((group, index) => {
-            const item = document.createElement('div');
-            item.className = 'selected-item';
-            item.innerHTML = `
-                ${group}
-                <button type="button" class="remove-btn" onclick="removeGroup(${index})">
-                    ×
-                </button>
-            `;
-            container.appendChild(item);
-        });
-    }
-
-    function removeWeapon(index) {
-        selectedWeapons.splice(index, 1);
-        updateWeaponsList();
-        updateWeaponsHiddenInput();
-    }
-
-    function removeGroup(index) {
-        selectedGroups.splice(index, 1);
-        updateGroupsList();
-        updateGroupsHiddenInput();
-    }
-
-    function updateWeaponsHiddenInput() {
-        document.getElementById('weapons').value = selectedWeapons.join(',');
-    }
-
-    function updateGroupsHiddenInput() {
-        document.getElementById('groups').value = selectedGroups.join(',');
-    }
-
-    // Инициализация при загрузке страницы (если есть сохраненные данные)
-    document.addEventListener('DOMContentLoaded', function() {
-        // Если нужно инициализировать из скрытых полей
-        const weaponsValue = document.getElementById('weapons').value;
-        if (weaponsValue) {
-            selectedWeapons = weaponsValue.split(',').filter(Boolean);
-            updateWeaponsList();
-        }
-
-        const groupsValue = document.getElementById('groups').value;
-        if (groupsValue) {
-            selectedGroups = groupsValue.split(',').filter(Boolean);
-            updateGroupsList();
-        }
-    });
-</script>
 </body>
 </html>
